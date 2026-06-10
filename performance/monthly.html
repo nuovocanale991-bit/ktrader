@@ -48,16 +48,91 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 ::-webkit-scrollbar-thumb{background:#1a2742;border-radius:5px}
 ::-webkit-scrollbar-thumb:hover{background:#24365c}
 </style>
+<style>/* ── KT APP SHELL (sidebar) ── */
+body{padding-top:56px!important}
+.kt-topnav{position:fixed;top:0;left:0;right:0;height:56px;background:rgba(7,11,22,.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(59,130,246,.22);z-index:400;display:flex;align-items:center;padding:0 16px;gap:12px;box-shadow:0 8px 28px rgba(0,0,0,.5)}
+.kt-burger{width:36px;height:36px;border:1px solid #1e293b;border-radius:8px;background:transparent;color:#94a3b8;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.kt-burger:hover{background:#1e293b;color:#e2e8f0}
+.kt-burger svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+.kt-logo{font-weight:900;font-size:18px;color:#fff;text-decoration:none;letter-spacing:.6px;text-shadow:0 0 16px rgba(59,130,246,.55);flex-shrink:0}
+.kt-logo span{color:#3b82f6}
+.kt-logo:hover{text-decoration:none}
+.kt-spacer{flex:1}
+.kt-live{display:flex;align-items:center;gap:6px;font-size:12px;color:#4ade80;background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-radius:6px;padding:4px 10px;flex-shrink:0}
+.kt-dot{width:7px;height:7px;border-radius:50%;background:#22c55e;animation:ktblink 1.8s infinite}
+.kt-cta{background:#3b82f6;color:#fff;border-radius:8px;padding:8px 16px;font-size:13px;font-weight:700;text-decoration:none;flex-shrink:0}
+.kt-cta:hover{opacity:.85;text-decoration:none}
+.kt-side{position:fixed;left:0;top:56px;width:240px;height:calc(100vh - 56px);background:rgba(4,7,15,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-right:1px solid rgba(59,130,246,.14);overflow-y:auto;overflow-x:hidden;z-index:350;transition:transform .25s ease}
+.kt-side::-webkit-scrollbar{width:4px}
+.kt-side::-webkit-scrollbar-thumb{background:#1e293b;border-radius:2px}
+.kt-sec{padding:18px 12px 6px}
+.kt-lbl{font-size:10px;font-weight:800;color:#475569;letter-spacing:.8px;text-transform:uppercase;padding:0 6px;margin-bottom:6px}
+.kt-item{display:flex;align-items:center;gap:9px;padding:7px 10px;border-radius:8px;font-size:13px;color:#94a3b8;text-decoration:none;white-space:nowrap;overflow:hidden;transition:background .12s,color .12s}
+.kt-item:hover{background:#1e293b;color:#e2e8f0;text-decoration:none}
+.kt-item.on{background:rgba(59,130,246,.15);color:#60a5fa;border:1px solid rgba(59,130,246,.25);box-shadow:inset 2px 0 0 #3b82f6}
+.kt-ico{font-size:14px;flex-shrink:0;width:20px;text-align:center}
+.kt-txt{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis}
+.kt-bdg{font-size:9px;font-weight:800;padding:1px 5px;border-radius:4px;flex-shrink:0}
+.kt-bdg.g{background:rgba(34,197,94,.2);color:#4ade80}
+.kt-bdg.b{background:rgba(59,130,246,.2);color:#93c5fd}
+.kt-bdg.y{background:rgba(245,158,11,.15);color:#fbbf24}
+.kt-div{height:1px;background:#1e293b;margin:8px 12px}
+.kt-ov{display:none;position:fixed;inset:0;top:56px;background:rgba(0,0,0,.6);z-index:340;backdrop-filter:blur(2px)}
+.kt-ov.vis{display:block}
+.kt-main{margin-left:240px;min-height:calc(100vh - 56px)}
+@keyframes ktblink{0%,100%{opacity:1}50%{opacity:.3}}
+@media(max-width:900px){.kt-main{margin-left:0}.kt-side{transform:translateX(-240px)}.kt-side.open{transform:translateX(0)}}
+</style>
 </head>
 <body>
-<nav><div class="nav-inner">
-  <a href="../index.html" class="nav-logo">Next<span>trade</span></a>
-  <div class="nav-links">
-    <a href="../segnali.html">Segnali</a>
-    <a href="../chiamate.html">Chiamate</a>
-    <a href="index.html">Performance</a>
+<nav class="kt-topnav">
+  <button class="kt-burger" onclick="ktToggle()" aria-label="Apri menu"><svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+  <a href="../index.html" class="kt-logo">K<span>TRADER</span></a>
+  <div class="kt-spacer"></div>
+  <div class="kt-live"><span class="kt-dot"></span>LIVE</div>
+  <a href="../pricing.html" class="kt-cta">Abbonati →</a>
+</nav>
+<aside class="kt-side" id="kt-side">
+  <div class="kt-sec">
+    <div class="kt-lbl">Chiamate Live</div>
+    <a href="../chiamate.html" class="kt-item"><span class="kt-ico">🔵</span><span class="kt-txt">Crypto</span><span class="kt-bdg b">12</span></a>
+    <a href="../chiamate-tradizionali.html" class="kt-item"><span class="kt-ico">📈</span><span class="kt-txt">Mercati Tradizionali</span><span class="kt-bdg b">6</span></a>
+    <a href="../chiamate-materie-prime.html" class="kt-item"><span class="kt-ico">🛢️</span><span class="kt-txt">Materie Prime</span><span class="kt-bdg y">5</span></a>
+    <a href="../chiamate-forex.html" class="kt-item"><span class="kt-ico">💱</span><span class="kt-txt">Forex</span></a>
   </div>
-</div></nav>
+  <div class="kt-div"></div>
+  <div class="kt-sec">
+    <div class="kt-lbl">Segnali Live</div>
+    <a href="../segnali.html" class="kt-item"><span class="kt-ico">🔵</span><span class="kt-txt">Crypto</span></a>
+    <a href="../mercati-tradizionali.html" class="kt-item"><span class="kt-ico">📈</span><span class="kt-txt">Tradizionali</span></a>
+    <a href="../materie-prime.html" class="kt-item"><span class="kt-ico">🛢️</span><span class="kt-txt">Materie Prime</span></a>
+    <a href="../forex.html" class="kt-item"><span class="kt-ico">💱</span><span class="kt-txt">Forex</span></a>
+  </div>
+  <div class="kt-div"></div>
+  <div class="kt-sec">
+    <div class="kt-lbl">Bot Algoritmici</div>
+    <a href="../bot/trend-rider.html" class="kt-item"><span class="kt-ico">📈</span><span class="kt-txt">Trend Rider</span><span class="kt-bdg g">EDGE</span></a>
+    <a href="../bot/eth-v4.html" class="kt-item"><span class="kt-ico">⟠</span><span class="kt-txt">ETH V4 15m</span><span class="kt-bdg g">+232%</span></a>
+    <a href="../bot/sol-v2.html" class="kt-item"><span class="kt-ico">◎</span><span class="kt-txt">SOL V2 15m</span></a>
+    <a href="../bot/ut-bot-4h.html" class="kt-item"><span class="kt-ico">🔄</span><span class="kt-txt">UT Bot 4h</span><span class="kt-bdg g">+257%</span></a>
+    <a href="../bot/warren-mtf.html" class="kt-item"><span class="kt-ico">🧠</span><span class="kt-txt">Warren MTF</span></a>
+    <a href="../bot/zec-scalp.html" class="kt-item"><span class="kt-ico">⚡</span><span class="kt-txt">ZEC Scalp V3</span></a>
+    <a href="../bot/adaptive-regime.html" class="kt-item"><span class="kt-ico">🎯</span><span class="kt-txt">Adaptive Regime</span></a>
+    <a href="../bot/consensus-rider.html" class="kt-item"><span class="kt-ico">🔮</span><span class="kt-txt">Consensus Rider</span></a>
+  </div>
+  <div class="kt-div"></div>
+  <div class="kt-sec">
+    <div class="kt-lbl">Strumenti</div>
+    <a href="../ai.html" class="kt-item"><span class="kt-ico">🤖</span><span class="kt-txt">Agent AI</span><span class="kt-bdg y">FREE</span></a>
+    <a href="../calendario.html" class="kt-item"><span class="kt-ico">📅</span><span class="kt-txt">Calendario</span></a>
+    <a href="../performance/index.html" class="kt-item"><span class="kt-ico">📊</span><span class="kt-txt">Performance</span></a>
+    <a href="../pricing.html" class="kt-item"><span class="kt-ico">💰</span><span class="kt-txt">Piani e Prezzi</span></a>
+    <a href="https://t.me/GIO33BOT" target="_blank" rel="noopener" class="kt-item"><span class="kt-ico">📬</span><span class="kt-txt">@GIO33BOT</span></a>
+  </div>
+  <div style="height:16px"></div>
+</aside>
+<div class="kt-ov" id="kt-ov" onclick="ktClose()"></div>
+<div class="kt-main">
 
 <div class="container">
 <div class="hero">
@@ -145,6 +220,12 @@ const moStart = now.toISOString().slice(0,7)+'-01';
     document.getElementById('lstatus').innerHTML='Dashboard offline — <a href="http://localhost:8081" target="_blank">apri il dashboard</a>';
   }
 })();
+</script>
+</div>
+<script>
+function ktToggle(){var s=document.getElementById('kt-side'),o=document.getElementById('kt-ov');if(s.classList.contains('open')){s.classList.remove('open');o.classList.remove('vis')}else{s.classList.add('open');o.classList.add('vis')}}
+function ktClose(){document.getElementById('kt-side').classList.remove('open');document.getElementById('kt-ov').classList.remove('vis')}
+(function(){var p=location.pathname.split('/').pop()||'index.html';document.querySelectorAll('.kt-item').forEach(function(a){var h=(a.getAttribute('href')||'').split('/').pop();if(h===p)a.classList.add('on')})})();
 </script>
 </body>
 </html>
