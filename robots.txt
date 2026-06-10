@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://nuovocanale991-bit.github.io/ktrader/sitemap.xml

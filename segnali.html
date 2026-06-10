@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sala Segnali LIVE — KTrader | 12 Crypto + S&amp;P500, Nasdaq, Oro, Argento, Petrolio</title>
+<meta name="description" content="Sala segnali trading live KTrader: 12 crypto + 5 mercati tradizionali (S&P500, Nasdaq, Oro, Argento, Petrolio) su 5 timeframe con 20 strategie tecniche. Segnali su candela chiusa ogni 60 secondi.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://nuovocanale991-bit.github.io/ktrader/segnali.html">
+<meta property="og:title" content="Sala Segnali LIVE — KTrader | 12 Crypto + 5 Mercati Tradizionali">
+<meta property="og:description" content="12 crypto + S&P500, Nasdaq, Oro, Argento, Petrolio · 5 timeframe · 20 strategie · Aggiornamento ogni 60 secondi">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Sala Segnali LIVE KTrader",
+  "description": "Segnali di trading live su 12 crypto (Binance API) + 5 mercati tradizionali — S&P500, Nasdaq, Oro, Argento, Petrolio (Yahoo Finance). 5 timeframe con 20 strategie tecniche. Aggiornamento ogni 60 secondi su candela chiusa.",
+  "url": "https://nuovocanale991-bit.github.io/ktrader/segnali.html",
+  "inLanguage": "it",
+  "breadcrumb": {
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "KTrader", "item": "https://nuovocanale991-bit.github.io/ktrader"},
+      {"@type": "ListItem", "position": 2, "name": "Sala Segnali", "item": "https://nuovocanale991-bit.github.io/ktrader/segnali.html"}
+    ]
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Come funziona la sala segnali KTrader?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La sala segnali KTrader analizza 12 crypto + 5 mercati tradizionali (S&P500, Nasdaq, Oro, Argento, Petrolio) su 5 timeframe (5m, 15m, 1h, 4h, 1d) usando 20 strategie tecniche in parallelo. Ogni segnale viene calcolato su candela chiusa per eliminare i falsi segnali intracandle. Il risultato è un segnale ibrido (LONG/SHORT/NEUTRAL) con percentuale di consenso tra le strategie."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Quali asset sono coperti dalla sala segnali KTrader?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La sala segnali KTrader copre 17 asset: 12 crypto (BTC, ETH, BNB, SOL, XRP, ADA, AVAX, DOGE, LINK, LTC, DOT, MATIC) tramite Binance API, più 5 mercati tradizionali (S&P500, Nasdaq, Oro, Argento, Petrolio WTI) tramite Yahoo Finance. Aggiornamento ogni 60 secondi."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Con quale frequenza si aggiornano i segnali?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "I segnali si aggiornano ogni 60 secondi sulla dashboard web per tutti i 17 asset (12 crypto + 5 tradizionali). Su Telegram @GIO33BOT (Piano Pro) vengono inviati in tempo reale alla chiusura di ogni candela. Il calcolo avviene solo su candela chiusa, non su prezzo live, per garantire segnali stabili."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Cosa significa il punteggio percentuale nel segnale?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Il punteggio (es. 80%) indica la percentuale di strategie che concordano nella stessa direzione. 80% LONG significa che 16 strategie su 20 segnalano LONG. Sopra il 70% il segnale è considerato forte. Sotto il 50% il segnale è considerato debole o neutro."
+      }
+    }
+  ]
+}
+</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0f1e;color:#e2e8f0;font-family:'Segoe UI',system-ui,sans-serif;line-height:1.6}
+a{color:#60a5fa;text-decoration:none}
+.container{max-width:1100px;margin:0 auto;padding:0 20px}
+nav{background:#0d1526;border-bottom:1px solid #1e293b;position:sticky;top:0;z-index:50}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;max-width:1100px;margin:0 auto;flex-wrap:wrap;gap:10px}
+.nav-logo{font-weight:800;font-size:20px;color:#fff;display:flex;align-items:center;gap:8px}
+.nav-logo span{color:#3b82f6}
+.nav-links{display:flex;gap:20px;font-size:14px}
+.nav-links a{color:#94a3b8}
+.nav-links a:hover{color:#fff}
+.btn{display:inline-block;padding:10px 22px;border-radius:8px;font-weight:700;font-size:14px;cursor:pointer;border:none;transition:opacity .15s}
+.btn-primary{background:#3b82f6;color:#fff}
+.btn-primary:hover{opacity:.85;text-decoration:none}
+.btn-outline{background:transparent;color:#3b82f6;border:1px solid #3b82f6}
+.btn-outline:hover{background:#1e3a5f;text-decoration:none}
+.page-hero{padding:48px 20px 36px;background:radial-gradient(ellipse at 50% 0%, #1a3a6033 0%, transparent 70%)}
+.page-hero h1{font-size:clamp(22px,4vw,36px);font-weight:900;color:#fff;margin-bottom:10px}
+.page-hero p{font-size:14px;color:#94a3b8;max-width:600px}
+/* MATRICE */
+.matrix-wrap{overflow-x:auto;border:1px solid #1e293b;border-radius:14px;background:#080d1a}
+table{width:100%;border-collapse:collapse;min-width:720px}
+th{background:#0d1526;padding:10px 8px;font-size:11px;color:#64748b;font-weight:700;border-bottom:2px solid #1e293b;white-space:nowrap;text-align:center}
+th:first-child{text-align:left;padding-left:16px}
+td{padding:9px 6px;border-bottom:1px solid #111827;text-align:center}
+tr:hover td{background:#0d1526}
+.asset-name{font-weight:700;color:#fff;font-size:13px}
+.asset-price{font-size:11px;color:#475569;display:block;margin-top:1px}
+.cell{border-radius:6px;padding:4px 8px;font-size:11px;font-weight:700;display:inline-block;min-width:58px}
+.long{background:rgba(34,197,94,.15);color:#4ade80;border:1px solid rgba(34,197,94,.3)}
+.short{background:rgba(239,68,68,.15);color:#f87171;border:1px solid rgba(239,68,68,.3)}
+.neutral{background:rgba(71,85,105,.1);color:#475569;border:1px solid rgba(71,85,105,.2)}
+.align-long{background:rgba(34,197,94,.2);color:#4ade80;border:1px solid rgba(34,197,94,.4);border-radius:8px;padding:3px 8px;font-size:11px;font-weight:700;white-space:nowrap}
+.align-short{background:rgba(239,68,68,.2);color:#f87171;border:1px solid rgba(239,68,68,.4);border-radius:8px;padding:3px 8px;font-size:11px;font-weight:700;white-space:nowrap}
+.align-weak{background:rgba(251,191,36,.12);color:#fbbf24;border:1px solid rgba(251,191,36,.3);border-radius:8px;padding:3px 8px;font-size:11px;font-weight:700;white-space:nowrap}
+/* FILTRI */
+.filter-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+.pill{background:#111827;border:1px solid #1e293b;border-radius:6px;padding:5px 14px;font-size:13px;color:#94a3b8;cursor:pointer}
+.pill.on{background:#1d4ed8;border-color:#3b82f6;color:#fff}
+/* COME LEGGERE */
+.how-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin-top:24px}
+.how-card{background:#111827;border:1px solid #1e293b;border-radius:10px;padding:18px}
+.how-card h3{font-size:14px;font-weight:700;color:#e2e8f0;margin-bottom:8px}
+.how-card p{font-size:13px;color:#64748b;line-height:1.6}
+/* STRATEGIE */
+.strat-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:16px}
+.strat-table th{text-align:left;padding:8px 12px;color:#64748b;font-size:11px;font-weight:700;border-bottom:1px solid #1e293b;background:#080d1a}
+.strat-table td{padding:8px 12px;border-bottom:1px solid #111827;color:#94a3b8}
+.strat-table td:first-child{color:#e2e8f0;font-weight:600}
+/* FAQ */
+.faq-item{border-bottom:1px solid #1e293b;padding:18px 0}
+.faq-item h3{font-size:15px;font-weight:600;color:#e2e8f0;margin-bottom:8px}
+.faq-item p{font-size:14px;color:#94a3b8;line-height:1.6}
+/* TELEGRAM CTA */
+.tg-box{background:linear-gradient(135deg,#0c2242 0%,#1a3a60 100%);border:1px solid #1d4ed8;border-radius:14px;padding:32px;text-align:center}
+.tg-box h2{font-size:22px;color:#fff;font-weight:800;margin-bottom:10px}
+.tg-box p{color:#94a3b8;font-size:14px;margin-bottom:20px;max-width:480px;margin-left:auto;margin-right:auto}
+footer{background:#0d1526;border-top:1px solid #1e293b;padding:24px 20px;text-align:center;font-size:13px;color:#475569}
+.nav-item{position:relative}.nav-item>a{display:flex;align-items:center;gap:4px}.nav-item>a::after{content:'▾';font-size:10px;opacity:.6;transition:transform .2s}.nav-item:hover>a::after{transform:rotate(180deg)}.dropdown{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%) translateY(-6px);background:#0d1526;border:1px solid #1e293b;border-radius:14px;padding:16px;opacity:0;visibility:hidden;transition:opacity .18s,transform .18s;z-index:200;box-shadow:0 20px 60px rgba(0,0,0,.6);pointer-events:none}.nav-item:hover .dropdown{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);pointer-events:auto}.dd-segnali{min-width:300px;display:flex;flex-direction:column;gap:6px}.dd-sig-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;border:1px solid transparent;transition:background .15s;text-decoration:none!important;color:#e2e8f0}.dd-sig-item:hover{background:#1e293b;border-color:#334155;text-decoration:none!important}.dd-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}.dd-info{display:flex;flex-direction:column;gap:1px}.dd-name{font-size:13px;font-weight:600;color:#e2e8f0}.dd-meta{font-size:11px;color:#64748b}.dd-header{font-size:11px;font-weight:700;color:#475569;letter-spacing:.6px;padding:0 4px;margin-bottom:2px}.dd-separator{height:1px;background:#1e293b;margin:6px 0}
+@media(max-width:600px){.nav-links{display:none}}
+</style>
+<style>/* ── KTRADER SPACE SKIN ── */
+body{background:#04070f!important}
+body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(1100px 540px at 85% -10%,rgba(59,130,246,.12),transparent 60%),radial-gradient(900px 500px at -5% 110%,rgba(34,211,238,.06),transparent 60%),repeating-linear-gradient(0deg,transparent 0 47px,rgba(99,140,255,.028) 47px 48px),repeating-linear-gradient(90deg,transparent 0 47px,rgba(99,140,255,.028) 47px 48px)}
+::selection{background:rgba(59,130,246,.4);color:#fff}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:#060a14}
+::-webkit-scrollbar-thumb{background:#1a2742;border-radius:5px}
+::-webkit-scrollbar-thumb:hover{background:#24365c}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">K<span>TRADER</span></a>
+    <div class="nav-links">
+      <a href="index.html#bot">I Bot</a>
+      <div class="nav-item">
+        <a href="segnali.html" style="color:#3b82f6;font-weight:700;">Sala Segnali</a>
+        <div class="dropdown dd-segnali">
+          <div class="dd-header">SEGNALI LIVE</div>
+          <a href="segnali.html" class="dd-sig-item" style="background:#0a1628;border-color:#1e3a5f;"><div class="dd-icon" style="background:#0a1628;font-size:18px;">🔵</div><div class="dd-info"><span class="dd-name" style="color:#60a5fa;">Crypto</span><span class="dd-meta">BTC, ETH, SOL, XRP + 8 altri</span></div></a>
+          <a href="mercati-tradizionali.html" class="dd-sig-item"><div class="dd-icon" style="background:#0a1e0a;font-size:18px;">📈</div><div class="dd-info"><span class="dd-name">Mercati Tradizionali</span><span class="dd-meta">S&amp;P500, Nasdaq, DAX + altri</span></div></a>
+          <a href="materie-prime.html" class="dd-sig-item"><div class="dd-icon" style="background:#1a1003;font-size:18px;">🛢️</div><div class="dd-info"><span class="dd-name">Materie Prime</span><span class="dd-meta">Oro, Argento, Petrolio, Rame</span></div></a>
+          <a href="forex.html" class="dd-sig-item"><div class="dd-icon" style="background:#110a1f;font-size:18px;">💱</div><div class="dd-info"><span class="dd-name">Forex</span><span class="dd-meta">EUR/USD, GBP/USD + 5 major</span></div></a>
+          <div class="dd-separator"></div>
+          <a href="segnali.html" style="display:block;text-align:center;font-size:13px;font-weight:600;color:#3b82f6;padding:6px 0;text-decoration:none;">Sala Segnali LIVE →</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="chiamate.html">Chiamate</a>
+        <div class="dropdown dd-segnali">
+          <div class="dd-header">CHIAMATE LIVE</div>
+          <a href="chiamate.html" class="dd-sig-item"><div class="dd-icon" style="background:#0a1628;font-size:18px;">🔵</div><div class="dd-info"><span class="dd-name">Crypto</span><span class="dd-meta">BTC, ETH, SOL + 9 altri</span></div></a>
+          <a href="chiamate-tradizionali.html" class="dd-sig-item"><div class="dd-icon" style="background:#0a1e0a;font-size:18px;">📈</div><div class="dd-info"><span class="dd-name">Mercati Tradizionali</span><span class="dd-meta">S&amp;P500, Nasdaq, DAX, Nikkei</span></div></a>
+          <a href="chiamate-materie-prime.html" class="dd-sig-item"><div class="dd-icon" style="background:#1a1003;font-size:18px;">🛢️</div><div class="dd-info"><span class="dd-name">Materie Prime</span><span class="dd-meta">Oro, Argento, Petrolio, Rame</span></div></a>
+          <a href="chiamate-forex.html" class="dd-sig-item"><div class="dd-icon" style="background:#110a1f;font-size:18px;">💱</div><div class="dd-info"><span class="dd-name">Forex</span><span class="dd-meta">EUR/USD, GBP/USD + 5 major</span></div></a>
+          <div class="dd-separator"></div>
+          <a href="chiamate.html" style="display:block;text-align:center;font-size:13px;font-weight:600;color:#3b82f6;padding:6px 0;text-decoration:none;">Tutte le Chiamate →</a>
+        </div>
+      </div>
+      <a href="calendario.html">Calendario</a>
+      <a href="ai.html" style="color:#3b82f6;font-weight:700;">Agent AI</a>
+      <a href="pricing.html">Prezzi</a>
+      <a href="https://t.me/GIO33BOT" target="_blank" rel="noopener">Telegram</a>
+    </div>
+    <a href="pricing.html" class="btn btn-primary">Vedi i Piani →</a>
+  </div>
+</nav>
+
+<main>
+
+<div class="page-hero">
+  <div class="container">
+    <nav aria-label="breadcrumb" style="font-size:12px;color:#475569;margin-bottom:14px;">
+      <a href="index.html">KTrader</a> › Sala Segnali
+    </nav>
+    <h1>Sala Segnali LIVE <span style="background:#22c55e22;color:#4ade80;border:1px solid #22c55e44;border-radius:6px;font-size:13px;padding:3px 10px;font-weight:600;vertical-align:middle;">● LIVE</span></h1>
+    <p>12 crypto + 5 mercati tradizionali (S&amp;P500, Nasdaq, Oro, Argento, Petrolio) su 5 timeframe con <strong style="color:#e2e8f0;">20 strategie tecniche</strong>. Segnali calcolati su <strong style="color:#e2e8f0;">candela chiusa</strong>. Volume in tempo reale · Aggiornamento ogni 60 secondi.</p>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:20px;font-size:13px;">
+      <span style="color:#64748b;">Crypto: <strong style="color:#e2e8f0;">12</strong></span>
+      <span style="color:#64748b;">Tradizionali: <strong style="color:#e2e8f0;">5</strong></span>
+      <span style="color:#64748b;">Timeframe: <strong style="color:#e2e8f0;">5</strong></span>
+      <span style="color:#64748b;">Strategie: <strong style="color:#e2e8f0;">20</strong></span>
+      <span style="color:#64748b;">Fonte: <strong style="color:#f59e0b;">Binance · Yahoo Finance</strong></span>
+    </div>
+  </div>
+</div>
+
+<div style="padding:24px 20px 48px">
+  <div class="container">
+
+    <!-- FILTRI -->
+    <div class="filter-bar">
+      <span style="font-size:13px;color:#64748b;">Mostra:</span>
+      <button class="pill on">Tutti</button>
+      <button class="pill">Solo LONG</button>
+      <button class="pill">Solo SHORT</button>
+      <button class="pill">Allineati (5+ TF)</button>
+    </div>
+
+    <!-- MATRICE SEGNALI STATICA -->
+    <div class="matrix-wrap" style="margin-bottom:32px;">
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align:left;padding-left:16px;min-width:120px;">Asset</th>
+            <th style="min-width:100px;">Allineam.</th>
+            <th>5m</th><th>15m</th><th>1h</th><th>4h</th><th>1d</th>
+          </tr>
+        </thead>
+        <tbody id="signal-tbody">
+          <tr>
+            <td colspan="7" style="text-align:center;padding:40px;color:#64748b;font-size:14px;">
+              ⟳ Caricamento segnali live Binance...
+            </td>
+          </tr>
+        </tbody>
+        <tfoot id="signal-tfoot"></tfoot>
+      </table>
+    </div>
+
+    <div id="signal-status" style="font-size:12px;color:#475569;margin-bottom:32px;">
+      Caricamento segnali live Binance...
+    </div>
+
+    <!-- REPORT MULTI-PERIODO -->
+    <h2 style="font-size:20px;font-weight:700;color:#fff;margin:8px 0 6px;">Report segnali — Giornaliero · Settimanale · Annuale</h2>
+    <p style="font-size:14px;color:#64748b;margin-bottom:16px;">Segnale ibrido (20 strategie) su 3 orizzonti temporali. Il <strong style="color:#e2e8f0;">Bias Globale</strong> indica la direzione dominante.</p>
+
+    <div id="report-summary" style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px;font-size:13px;"></div>
+
+    <div class="matrix-wrap" style="margin-bottom:32px;">
+      <table>
+        <thead>
+          <tr>
+            <th style="text-align:left;padding-left:16px;min-width:120px;">Asset</th>
+            <th>Oggi (1d)</th>
+            <th>Settimana (1w)</th>
+            <th>Anno (1M)</th>
+            <th style="min-width:120px;">Bias Globale</th>
+          </tr>
+        </thead>
+        <tbody id="report-tbody">
+          <tr><td colspan="5" style="text-align:center;padding:40px;color:#64748b;font-size:14px;">⟳ Caricamento report multi-periodo...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ORARI DEI SEGNALI -->
+    <h2 style="font-size:20px;font-weight:700;color:#fff;margin-bottom:6px;">Orari dei segnali e sessioni di mercato</h2>
+    <p style="font-size:14px;color:#64748b;margin-bottom:16px;">Il crypto trading è 24/7, ma la volatilità e la qualità dei segnali varia per sessione. Orari in CET (ora italiana).</p>
+
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;flex-wrap:wrap;">
+      <div style="background:#111827;border:1px solid #1e293b;border-radius:10px;padding:12px 20px;display:flex;align-items:center;gap:10px;">
+        <span style="font-size:22px;">🕐</span>
+        <div>
+          <div id="live-clock" style="font-size:20px;font-weight:800;color:#fff;letter-spacing:1px;">--:--:--</div>
+          <div style="font-size:11px;color:#64748b;">Ora corrente CET</div>
+        </div>
+      </div>
+      <div id="session-badge" style="background:#111827;border:1px solid #1e293b;border-radius:10px;padding:12px 20px;">
+        <div id="session-name" style="font-size:14px;font-weight:700;color:#f59e0b;">Calcolo...</div>
+        <div style="font-size:11px;color:#64748b;">Sessione attiva</div>
+      </div>
+    </div>
+
+    <div style="overflow-x:auto;border:1px solid #1e293b;border-radius:12px;margin-bottom:32px;">
+      <table style="width:100%;border-collapse:collapse;min-width:560px;">
+        <thead>
+          <tr style="background:#0d1526;">
+            <th style="padding:10px 14px;text-align:left;font-size:11px;color:#64748b;font-weight:700;border-bottom:2px solid #1e293b;">Sessione</th>
+            <th style="padding:10px 8px;text-align:center;font-size:11px;color:#64748b;font-weight:700;border-bottom:2px solid #1e293b;">Orario CET</th>
+            <th style="padding:10px 8px;text-align:center;font-size:11px;color:#64748b;font-weight:700;border-bottom:2px solid #1e293b;">Volatilità</th>
+            <th style="padding:10px 8px;text-align:left;font-size:11px;color:#64748b;font-weight:700;border-bottom:2px solid #1e293b;">Asset più attivi</th>
+            <th style="padding:10px 8px;text-align:left;font-size:11px;color:#64748b;font-weight:700;border-bottom:2px solid #1e293b;">TF consigliato</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr id="row-tokyo" style="border-bottom:1px solid #111827;">
+            <td style="padding:10px 14px;font-weight:600;color:#e2e8f0;">🌏 Tokyo</td>
+            <td style="padding:10px 8px;text-align:center;color:#94a3b8;">01:00 – 09:00</td>
+            <td style="padding:10px 8px;text-align:center;"><span style="color:#f59e0b;font-weight:700;">Media</span></td>
+            <td style="padding:10px 8px;color:#94a3b8;font-size:13px;">XRP, BTC, ETH</td>
+            <td style="padding:10px 8px;color:#94a3b8;font-size:13px;">1h, 4h</td>
+          </tr>
+          <tr id="row-london" style="border-bottom:1px solid #111827;">
+            <td style="padding:10px 14px;font-weight:600;color:#e2e8f0;">🇬🇧 Londra</td>
+            <td style="padding:10px 8px;text-align:center;color:#94a3b8;">08:00 – 17:00</td>
+            <td style="padding:10px 8px;text-align:center;"><span style="color:#22c55e;font-weight:700;">Alta</span></td>
+            <td style="padding:10px 8px;color:#94a3b8;font-size:13px;">BTC, ETH, SOL</td>
+            <td style="padding:10px 8px;color:#94a3b8;font-size:13px;">15m, 1h</td>
+          </tr>
+          <tr id="row-overlap" style="border-bottom:1px solid #111827;background:rgba(59,130,246,.05);">
+            <td style="padding:10px 14px;font-weight:700;color:#60a5fa;">⚡ Overlap</td>
+            <td style="padding:10px 8px;text-align:center;color:#60a5fa;font-weight:700;">14:00 – 17:00</td>
+            <td style="padding:10px 8px;text-align:center;"><span style="color:#22c55e;font-weight:800;">Massima</span></td>
+            <td style="padding:10px 8px;color:#94a3b8;font-size:13px;">Tutti</td>
+            <td style="padding:10px 8px;color:#94a3b8;font-size:13px;">5m, 15m, 1h</td>
+          </tr>
+          <tr id="row-newyork" style="border-bottom:1px solid #111827;">
+            <td style="padding:10px 14px;font-weight:600;color:#e2e8f0;">🗽 New York</td>
+            <td style="padding:10px 8px;text-align:center;color:#94a3b8;">14:30 – 23:00</td>
+            <td style="padding:10px 8px;text-align:center;"><span style="color:#22c55e;font-weight:700;">Alta</span></td>
+            <td style="padding:10px 8px;color:#94a3b8;font-size:13px;">BTC, ZEC, XMR</td>
+            <td style="padding:10px 8px;color:#94a3b8;font-size:13px;">15m, 1h, 4h</td>
+          </tr>
+          <tr id="row-night" style="border-bottom:1px solid #111827;">
+            <td style="padding:10px 14px;font-weight:600;color:#475569;">🌙 Notturna</td>
+            <td style="padding:10px 8px;text-align:center;color:#475569;">23:00 – 01:00</td>
+            <td style="padding:10px 8px;text-align:center;"><span style="color:#475569;font-weight:700;">Bassa</span></td>
+            <td style="padding:10px 8px;color:#475569;font-size:13px;">Evitare scalp</td>
+            <td style="padding:10px 8px;color:#475569;font-size:13px;">4h, 1d</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- CALENDARIO ECONOMICO LINK -->
+    <a href="calendario.html" style="display:flex;align-items:center;justify-content:space-between;gap:16px;background:linear-gradient(135deg,#0d1a33,#112244);border:1px solid #1d4ed8;border-radius:14px;padding:20px 24px;margin-bottom:32px;text-decoration:none;flex-wrap:wrap;">
+      <div style="display:flex;align-items:center;gap:14px;">
+        <span style="font-size:28px;">📅</span>
+        <div>
+          <div style="font-size:16px;font-weight:800;color:#fff;">Calendario Economico — Giugno 2026</div>
+          <div style="font-size:13px;color:#94a3b8;margin-top:3px;">8 eventi · 3 alto impatto ⚡ · Countdown + veto automatico bot</div>
+        </div>
+      </div>
+      <span style="background:#3b82f6;color:#fff;border-radius:8px;padding:8px 18px;font-size:14px;font-weight:700;white-space:nowrap;">Apri calendario →</span>
+    </a>
+
+    <!-- COME LEGGERE -->
+    <h2 style="font-size:20px;font-weight:700;color:#fff;margin-bottom:6px;">Come leggere la matrice segnali</h2>
+    <p style="font-size:14px;color:#64748b;margin-bottom:4px;">Guida rapida all'interpretazione dei segnali KTrader</p>
+    <div class="how-grid">
+      <div class="how-card">
+        <h3>LONG — segnale rialzista</h3>
+        <p>La maggioranza delle strategie segnala un'opportunità di acquisto (long). La percentuale indica quante strategie concordano. Sopra 70% il segnale è forte.</p>
+      </div>
+      <div class="how-card">
+        <h3>SHORT — segnale ribassista</h3>
+        <p>La maggioranza delle strategie segnala un'opportunità di vendita (short). Sopra 70% SHORT il segnale è forte. In bear market dominante i segnali SHORT aumentano.</p>
+      </div>
+      <div class="how-card">
+        <h3>· · · — segnale neutro</h3>
+        <p>Le strategie sono divise o nessuna maggioranza chiara. Nessuna operazione consigliata su questo asset/timeframe. Meglio aspettare chiarezza direzionale.</p>
+      </div>
+      <div class="how-card">
+        <h3>Allineamento multi-TF</h3>
+        <p>La colonna "Allineam." mostra se la direzione è coerente su più timeframe. "LONG 5/5" significa che tutti i 5 TF analizzati concordano: segnale molto forte.</p>
+      </div>
+    </div>
+
+    <!-- STRATEGIE -->
+    <h2 style="font-size:20px;font-weight:700;color:#fff;margin:40px 0 6px;">Le 20 strategie tecniche analizzate</h2>
+    <p style="font-size:14px;color:#64748b;margin-bottom:4px;">Ogni segnale è il voto aggregato di <strong style="color:#e2e8f0;">20 indicatori tecnici indipendenti</strong></p>
+    <table class="strat-table">
+      <thead><tr><th>Strategia</th><th>Tipo</th><th>Segnale LONG</th></tr></thead>
+      <tbody>
+        <tr><td>RSI (14)</td><td>Momentum</td><td>RSI &lt; 35 (ipervenduto)</td></tr>
+        <tr><td>EMA Cross 9/21</td><td>Trend</td><td>EMA9 supera EMA21</td></tr>
+        <tr><td>EMA 200</td><td>Trend</td><td>Prezzo sopra EMA200</td></tr>
+        <tr><td>MACD</td><td>Trend/Momentum</td><td>MACD supera Signal Line</td></tr>
+        <tr><td>Bollinger Bands</td><td>Volatilità</td><td>Prezzo sotto banda inferiore</td></tr>
+        <tr><td>Supertrend</td><td>Trend</td><td>Direzione bullish (ATR ×3)</td></tr>
+        <tr><td>UT Bot Trail</td><td>Momentum</td><td>Prezzo sopra trailing stop</td></tr>
+        <tr><td>Stocastico (14)</td><td>Momentum</td><td>K &lt; 20 (ipervenduto)</td></tr>
+        <tr><td>Parabolic SAR</td><td>Trend</td><td>SAR sotto il prezzo</td></tr>
+        <tr><td>Golden Cross 50/200</td><td>Trend</td><td>EMA50 sopra EMA200</td></tr>
+        <tr><td>ADX / DMI</td><td>Trend</td><td>+DI &gt; -DI con ADX &gt; 20</td></tr>
+        <tr><td>CCI (20)</td><td>Momentum</td><td>CCI &gt; +100</td></tr>
+        <tr><td>Williams %R</td><td>Momentum</td><td>WR &lt; -80</td></tr>
+        <tr><td>StochRSI</td><td>Momentum</td><td>K &lt; 0.2</td></tr>
+        <tr><td>Keltner Channel</td><td>Volatilità</td><td>Breakout sopra banda</td></tr>
+        <tr><td>MFI (14)</td><td>Volume</td><td>MFI &lt; 30 (ipervenduto)</td></tr>
+        <tr><td>OBV vs EMA20</td><td>Volume</td><td>OBV sale sopra la sua media</td></tr>
+        <tr><td>TRIX (15)</td><td>Trend</td><td>TRIX positivo e in salita</td></tr>
+        <tr><td>ROC (12)</td><td>Momentum</td><td>Rate of Change &gt; +2%</td></tr>
+        <tr><td>Volume Spike</td><td>Volume</td><td>Vol ×1.5 su candela rialzista</td></tr>
+      </tbody>
+    </table>
+
+    <!-- FAQ -->
+    <h2 style="font-size:20px;font-weight:700;color:#fff;margin:48px 0 6px;">Domande frequenti sui segnali</h2>
+    <div style="margin-top:16px;">
+      <div class="faq-item">
+        <h3>Come funziona la sala segnali KTrader?</h3>
+        <p>La sala segnali analizza <strong>12 crypto + 5 mercati tradizionali su 5 timeframe</strong> (5m, 15m, 1h, 4h, 1d) usando <strong>20 strategie tecniche</strong> in parallelo. Mercati tradizionali: S&amp;P500, Nasdaq, Oro, Argento, Petrolio WTI. Ogni segnale viene calcolato su <strong style="color:#e2e8f0;">candela chiusa</strong> per eliminare i falsi segnali intracandle. Il risultato è un segnale ibrido (LONG/SHORT/NEUTRAL) con percentuale di consenso.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Quali asset sono coperti dalla sala segnali?</h3>
+        <p>BTC, ETH, BNB, SOL, XRP, ADA, AVAX, DOGE, LINK, LTC, DOT, MATIC — tutti in coppia USDT. Dati live da <strong style="color:#e2e8f0;">Binance API</strong> (pubblica, CORS-enabled). I bot algoritmici operano su <strong style="color:#e2e8f0;">MEXC Futures</strong> (fee maker 0%).</p>
+      </div>
+      <div class="faq-item">
+        <h3>Con quale frequenza si aggiornano i segnali?</h3>
+        <p>Aggiornamento ogni 60 secondi sulla dashboard. Su Telegram <a href="https://t.me/GIO33BOT">@GIO33BOT</a> i segnali vengono inviati in tempo reale alla chiusura di ogni candela. Il calcolo avviene solo su candela chiusa, non su prezzo live.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Cosa significa il punteggio percentuale?</h3>
+        <p>80% LONG = 16 strategie su 20 segnalano LONG. Sopra 70% il segnale è considerato forte. Sotto 50% il segnale è debole o neutro e non viene raccomandato per operare.</p>
+      </div>
+    </div>
+
+    <!-- CTA FINALE -->
+    <div class="tg-box" style="margin-top:48px;">
+      <h2>Vuoi i segnali in tempo reale?</h2>
+      <p>Passa a Pro per sbloccare alert Telegram istantanei, tutti e 5 i timeframe e <strong>1 bot algoritmico omaggio incluso</strong> (ETH V4 15m). Tutti i bot nel Premium. Inizia con 7 giorni di prova gratuita.</p>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <a href="pricing.html" class="btn btn-primary" style="font-size:16px;padding:12px 28px;">Vedi i Piani →</a>
+        <a href="https://t.me/GIO33BOT" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:15px;padding:12px 24px;">Telegram @GIO33BOT</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+</main>
+
+<footer>
+  <div class="container">
+    <p style="margin-bottom:8px;"><strong style="color:#94a3b8;">KTrader</strong> — Segnali Trading Crypto Live</p>
+    <p>Telegram: <a href="https://t.me/GIO33BOT">@GIO33BOT</a> · <a href="pricing.html">Piani</a> · <a href="legal/privacy.html">Privacy</a> · <a href="legal/terms.html">Termini</a></p>
+    <p style="margin-top:10px;font-size:11px;">I segnali sono solo informativi. Il trading su futures comporta rischio elevato di perdita del capitale. © 2026 KTrader</p>
+  </div>
+</footer>
+
+<script>
+// ── Indicatori ─────────────────────────────────────────────────────
+function ema(arr,period){
+  const out=new Array(arr.length).fill(null);
+  if(arr.length<period)return out;
+  let sum=0,cnt=0,seed=-1;
+  for(let i=0;i<arr.length&&cnt<period;i++){
+    if(arr[i]!==null){sum+=arr[i];cnt++;if(cnt===period)seed=i;}
+  }
+  if(seed<0)return out;
+  out[seed]=sum/period;
+  const k=2/(period+1);
+  for(let j=seed+1;j<arr.length;j++){
+    if(arr[j]===null){out[j]=out[j-1];continue;}
+    out[j]=arr[j]*k+out[j-1]*(1-k);
+  }
+  return out;
+}
+
+function rsi(close,period=14){
+  const out=new Array(close.length).fill(null);
+  if(close.length<period+1)return out;
+  let ag=0,al=0;
+  for(let i=1;i<=period;i++){const d=close[i]-close[i-1];if(d>0)ag+=d;else al-=d;}
+  ag/=period;al/=period;
+  out[period]=al===0?100:100-100/(1+ag/al);
+  for(let i=period+1;i<close.length;i++){
+    const d=close[i]-close[i-1];
+    ag=(ag*(period-1)+Math.max(d,0))/period;
+    al=(al*(period-1)+Math.max(-d,0))/period;
+    out[i]=al===0?100:100-100/(1+ag/al);
+  }
+  return out;
+}
+
+function atr(high,low,close,period=14){
+  const n=close.length,tr=[0];
+  for(let i=1;i<n;i++)tr.push(Math.max(high[i]-low[i],Math.abs(high[i]-close[i-1]),Math.abs(low[i]-close[i-1])));
+  const out=new Array(n).fill(null);
+  let s=0;for(let i=1;i<=period;i++)s+=tr[i];
+  out[period]=s/period;
+  for(let i=period+1;i<n;i++)out[i]=(out[i-1]*(period-1)+tr[i])/period;
+  return out;
+}
+
+function bollinger(close,period=20,mult=2.0){
+  const n=close.length,up=new Array(n).fill(null),lo=new Array(n).fill(null);
+  for(let i=period-1;i<n;i++){
+    const sl=close.slice(i-period+1,i+1);
+    const m=sl.reduce((a,b)=>a+b,0)/period;
+    const std=Math.sqrt(sl.reduce((a,b)=>a+(b-m)**2,0)/period);
+    up[i]=m+mult*std;lo[i]=m-mult*std;
+  }
+  return[up,lo];
+}
+
+function supertrend(high,low,close,period=10,mult=3.0){
+  const n=close.length,atrV=atr(high,low,close,period),dir=new Array(n).fill(null);
+  let st=null,pd=null;
+  for(let i=period;i<n;i++){
+    if(atrV[i]===null)continue;
+    const hl2=(high[i]+low[i])/2,up=hl2+mult*atrV[i],lo=hl2-mult*atrV[i];
+    if(pd===null){dir[i]=close[i]>lo?1:-1;st=dir[i]===1?lo:up;}
+    else if(pd===1){const nst=Math.max(lo,st);if(close[i]<nst){dir[i]=-1;st=up;}else{dir[i]=1;st=nst;}}
+    else{const nst=Math.min(up,st);if(close[i]>nst){dir[i]=1;st=lo;}else{dir[i]=-1;st=nst;}}
+    pd=dir[i];
+  }
+  return dir;
+}
+
+function utbot(close,high,low,mult=2.0,period=10){
+  const atrV=atr(high,low,close,period),n=close.length,trail=new Array(n).fill(null);
+  for(let i=period+1;i<n;i++){
+    if(atrV[i]===null){trail[i]=trail[i-1];continue;}
+    const nL=mult*atrV[i],prev=trail[i-1]!==null?trail[i-1]:close[i];
+    if(close[i]>prev)trail[i]=Math.max(prev,close[i]-nL);
+    else if(close[i]<prev)trail[i]=Math.min(prev,close[i]+nL);
+    else trail[i]=prev;
+  }
+  return trail;
+}
+
+function stoch(high,low,close,k=14){
+  const n=close.length,K=new Array(n).fill(null);
+  for(let i=k-1;i<n;i++){
+    const hi=Math.max(...high.slice(i-k+1,i+1)),lo=Math.min(...low.slice(i-k+1,i+1));
+    K[i]=hi===lo?50:100*(close[i]-lo)/(hi-lo);
+  }
+  return K;
+}
+
+function psar(high,low,af0=0.02,afMax=0.20){
+  const n=high.length,dir=new Array(n).fill(1);
+  if(n<3)return dir;
+  let sar=low[0],ep=high[0],af=af0,tr=1;
+  for(let i=1;i<n;i++){
+    const ps=sar;
+    if(tr===1){
+      sar=ps+af*(ep-ps);sar=Math.min(sar,low[i-1],i>1?low[i-2]:low[i-1]);
+      if(low[i]<sar){tr=-1;sar=ep;ep=low[i];af=af0;}
+      else if(high[i]>ep){ep=high[i];af=Math.min(af+af0,afMax);}
+    }else{
+      sar=ps+af*(ep-ps);sar=Math.max(sar,high[i-1],i>1?high[i-2]:high[i-1]);
+      if(high[i]>sar){tr=1;sar=ep;ep=high[i];af=af0;}
+      else if(low[i]<ep){ep=low[i];af=Math.min(af+af0,afMax);}
+    }
+    dir[i]=tr;
+  }
+  return dir;
+}
+
+// ── Indicatori aggiuntivi ─────────────────────────────────────────────
+function adxdmi(high,low,close,period=14){
+  const n=close.length,tr=[0],dmP=[0],dmM=[0];
+  for(let i=1;i<n;i++){
+    const up=high[i]-high[i-1],dn=low[i-1]-low[i];
+    tr.push(Math.max(high[i]-low[i],Math.abs(high[i]-close[i-1]),Math.abs(low[i]-close[i-1])));
+    dmP.push(up>dn&&up>0?up:0);dmM.push(dn>up&&dn>0?dn:0);
+  }
+  function ws(arr,p){const o=new Array(n).fill(null);let s=0;for(let i=1;i<=p;i++)s+=arr[i];o[p]=s;for(let i=p+1;i<n;i++)o[i]=o[i-1]-o[i-1]/p+arr[i];return o;}
+  const AT=ws(tr,period),DP=ws(dmP,period),DM=ws(dmM,period);
+  const dip=new Array(n).fill(null),dim=new Array(n).fill(null),dx=new Array(n).fill(null);
+  for(let i=period;i<n;i++){if(!AT[i]||AT[i]===0)continue;dip[i]=100*DP[i]/AT[i];dim[i]=100*DM[i]/AT[i];const s2=dip[i]+dim[i];if(s2>0)dx[i]=100*Math.abs(dip[i]-dim[i])/s2;}
+  const adx=new Array(n).fill(null);const st2=period*2;let s2=0,c2=0;
+  for(let i=period;i<st2&&i<n;i++){if(dx[i]!==null){s2+=dx[i];c2++;}}
+  if(c2>0&&st2-1<n)adx[st2-1]=s2/c2;
+  for(let i=st2;i<n;i++){if(adx[i-1]===null||dx[i]===null)continue;adx[i]=(adx[i-1]*(period-1)+dx[i])/period;}
+  return[adx,dip,dim];
+}
+
+function cci(high,low,close,period=20){
+  const tp=high.map((h,i)=>(h+low[i]+close[i])/3),out=new Array(close.length).fill(null);
+  for(let i=period-1;i<close.length;i++){const sl=tp.slice(i-period+1,i+1),m=sl.reduce((a,b)=>a+b,0)/period,md=sl.reduce((a,b)=>a+Math.abs(b-m),0)/period;out[i]=md===0?0:(tp[i]-m)/(0.015*md);}
+  return out;
+}
+
+function williamsR(high,low,close,period=14){
+  const out=new Array(close.length).fill(null);
+  for(let i=period-1;i<close.length;i++){const hi=Math.max(...high.slice(i-period+1,i+1)),lo=Math.min(...low.slice(i-period+1,i+1));out[i]=hi===lo?-50:-100*(hi-close[i])/(hi-lo);}
+  return out;
+}
+
+function stochRSI(close,rsiP=14,stP=14){
+  const rA=rsi(close,rsiP),n=close.length,out=new Array(n).fill(null);
+  for(let i=rsiP+stP-1;i<n;i++){const sl=rA.slice(i-stP+1,i+1).filter(v=>v!==null);if(sl.length<stP)continue;const hi=Math.max(...sl),lo=Math.min(...sl),curr=rA[i];if(curr===null)continue;out[i]=hi===lo?0.5:(curr-lo)/(hi-lo);}
+  return out;
+}
+
+function keltner(close,high,low,ep=20,ap=10,mult=2.0){
+  const mid=ema(close,ep),atrV=atr(high,low,close,ap);
+  return[mid.map((v,i)=>v!==null&&atrV[i]!==null?v+mult*atrV[i]:null),mid.map((v,i)=>v!==null&&atrV[i]!==null?v-mult*atrV[i]:null)];
+}
+
+function mfi(high,low,close,volume,period=14){
+  const n=close.length,tp=high.map((h,i)=>(h+low[i]+close[i])/3),out=new Array(n).fill(null);
+  for(let i=period;i<n;i++){let pos=0,neg=0;for(let j=i-period+1;j<=i;j++){const f=tp[j]*volume[j];if(tp[j]>tp[j-1])pos+=f;else if(tp[j]<tp[j-1])neg+=f;}out[i]=neg===0?100:100-100/(1+pos/neg);}
+  return out;
+}
+
+function obvEma(close,volume,emaPeriod=20){
+  const n=close.length,o=[0];
+  for(let i=1;i<n;i++){if(close[i]>close[i-1])o.push(o[i-1]+volume[i]);else if(close[i]<close[i-1])o.push(o[i-1]-volume[i]);else o.push(o[i-1]);}
+  return[o,ema(o,emaPeriod)];
+}
+
+function trix(close,period=15){
+  const e3=ema(ema(ema(close,period),period),period),out=new Array(close.length).fill(null);
+  for(let i=1;i<close.length;i++){if(e3[i]!==null&&e3[i-1]!==null&&e3[i-1]!==0)out[i]=(e3[i]-e3[i-1])/e3[i-1]*100;}
+  return out;
+}
+
+function roc(close,period=12){
+  const out=new Array(close.length).fill(null);
+  for(let i=period;i<close.length;i++){if(close[i-period]!==0)out[i]=(close[i]-close[i-period])/close[i-period]*100;}
+  return out;
+}
+
+function smaVol(volume,period=20){
+  const out=new Array(volume.length).fill(null);
+  for(let i=period-1;i<volume.length;i++){const sl=volume.slice(i-period+1,i+1);out[i]=sl.reduce((a,b)=>a+b,0)/period;}
+  return out;
+}
+
+// ── Segnale ──────────────────────────────────────────────────────────
+function computeVotes(df){
+  const n=df.c.length;
+  if(n<30)return null;
+  const i=n-2; // ultima candela chiusa
+  const cv=df.c[i];
+  const rsiA=rsi(df.c);
+  const e9=ema(df.c,9),e21=ema(df.c,21),e50=ema(df.c,50),e200=ema(df.c,200);
+  const e12=ema(df.c,12),e26=ema(df.c,26);
+  const macdL=e12.map((v,j)=>v!==null&&e26[j]!==null?v-e26[j]:null);
+  const sigL=ema(macdL,9);
+  const[bUp,bLo]=bollinger(df.c);
+  const stD=supertrend(df.h,df.l,df.c);
+  const utT=utbot(df.c,df.h,df.l);
+  const stK=stoch(df.h,df.l,df.c);
+  const psD=psar(df.h,df.l);
+  const v={};
+
+  const rv=rsiA[i];
+  if(rv!==null){if(rv<35)v.RSI={dir:'LONG'};else if(rv>65)v.RSI={dir:'SHORT'};else v.RSI={dir:'NEUTRAL'};}
+  else v.RSI={dir:'NEUTRAL'};
+
+  if(e9[i]&&e21[i])v.EMA_CROSS={dir:e9[i]>e21[i]?'LONG':'SHORT'};
+  else v.EMA_CROSS={dir:'NEUTRAL'};
+
+  if(e200[i]&&cv)v.EMA200={dir:cv>e200[i]?'LONG':'SHORT'};
+  else v.EMA200={dir:'NEUTRAL'};
+
+  if(macdL[i]!==null&&sigL[i]!==null)v.MACD={dir:macdL[i]>sigL[i]?'LONG':'SHORT'};
+  else v.MACD={dir:'NEUTRAL'};
+
+  if(cv&&bUp[i]&&bLo[i]){if(cv<bLo[i])v.BB={dir:'LONG'};else if(cv>bUp[i])v.BB={dir:'SHORT'};else v.BB={dir:'NEUTRAL'};}
+  else v.BB={dir:'NEUTRAL'};
+
+  if(stD[i]!==null)v.ST={dir:stD[i]===1?'LONG':'SHORT'};else v.ST={dir:'NEUTRAL'};
+
+  if(utT[i]!==null&&cv)v.UT={dir:cv>utT[i]?'LONG':'SHORT'};else v.UT={dir:'NEUTRAL'};
+
+  const kv=stK[i];
+  if(kv!==null){if(kv<20)v.STOCH={dir:'LONG'};else if(kv>80)v.STOCH={dir:'SHORT'};else v.STOCH={dir:'NEUTRAL'};}
+  else v.STOCH={dir:'NEUTRAL'};
+
+  if(psD[i]!==null)v.PSAR={dir:psD[i]===1?'LONG':'SHORT'};else v.PSAR={dir:'NEUTRAL'};
+
+  if(e50[i]&&e200[i])v.GDX={dir:e50[i]>e200[i]?'LONG':'SHORT'};else v.GDX={dir:'NEUTRAL'};
+
+  // ADX/DMI
+  const[adxA,dipA,dimA]=adxdmi(df.h,df.l,df.c);
+  if(adxA[i]!==null&&dipA[i]!==null&&dimA[i]!==null){if(adxA[i]<20)v.ADX={dir:'NEUTRAL'};else v.ADX={dir:dipA[i]>dimA[i]?'LONG':'SHORT'};}
+  else v.ADX={dir:'NEUTRAL'};
+
+  // CCI
+  const cciV=cci(df.h,df.l,df.c)[i];
+  if(cciV!==null){if(cciV>100)v.CCI={dir:'LONG'};else if(cciV<-100)v.CCI={dir:'SHORT'};else v.CCI={dir:'NEUTRAL'};}
+  else v.CCI={dir:'NEUTRAL'};
+
+  // Williams %R
+  const wrV=williamsR(df.h,df.l,df.c)[i];
+  if(wrV!==null){if(wrV<-80)v.WR={dir:'LONG'};else if(wrV>-20)v.WR={dir:'SHORT'};else v.WR={dir:'NEUTRAL'};}
+  else v.WR={dir:'NEUTRAL'};
+
+  // StochRSI
+  const srV=stochRSI(df.c)[i];
+  if(srV!==null){if(srV<0.2)v.SRSI={dir:'LONG'};else if(srV>0.8)v.SRSI={dir:'SHORT'};else v.SRSI={dir:'NEUTRAL'};}
+  else v.SRSI={dir:'NEUTRAL'};
+
+  // Keltner Channel
+  const[kUp,kLo]=keltner(df.c,df.h,df.l);
+  if(cv&&kUp[i]&&kLo[i]){if(cv>kUp[i])v.KELT={dir:'LONG'};else if(cv<kLo[i])v.KELT={dir:'SHORT'};else v.KELT={dir:'NEUTRAL'};}
+  else v.KELT={dir:'NEUTRAL'};
+
+  // MFI
+  const mfiV=mfi(df.h,df.l,df.c,df.v)[i];
+  if(mfiV!==null){if(mfiV<30)v.MFI={dir:'LONG'};else if(mfiV>70)v.MFI={dir:'SHORT'};else v.MFI={dir:'NEUTRAL'};}
+  else v.MFI={dir:'NEUTRAL'};
+
+  // OBV vs EMA20
+  const[obvA,obvE]=obvEma(df.c,df.v);
+  if(obvE[i]!==null)v.OBV={dir:obvA[i]>obvE[i]?'LONG':'SHORT'};else v.OBV={dir:'NEUTRAL'};
+
+  // TRIX
+  const trixV=trix(df.c)[i];
+  if(trixV!==null)v.TRIX={dir:trixV>0?'LONG':'SHORT'};else v.TRIX={dir:'NEUTRAL'};
+
+  // ROC
+  const rocV=roc(df.c)[i];
+  if(rocV!==null){if(rocV>2)v.ROC={dir:'LONG'};else if(rocV<-2)v.ROC={dir:'SHORT'};else v.ROC={dir:'NEUTRAL'};}
+  else v.ROC={dir:'NEUTRAL'};
+
+  // Volume spike confirmation
+  const vmA=smaVol(df.v)[i],volV=df.v[i];
+  if(vmA&&volV){const r=volV/vmA;v.VOL={dir:r>1.5?(df.c[i]>df.c[i-1]?'LONG':'SHORT'):'NEUTRAL'};}
+  else v.VOL={dir:'NEUTRAL'};
+
+  return v;
+}
+
+function hybrid(votes){
+  let longs=0,shorts=0;
+  for(const vv of Object.values(votes)){if(vv.dir==='LONG')longs++;else if(vv.dir==='SHORT')shorts++;}
+  const active=longs+shorts;
+  return{dir:longs>shorts?'LONG':shorts>longs?'SHORT':'NEUTRAL',score:active>0?Math.round(Math.max(longs,shorts)/active*100):0,longs,shorts};
+}
+
+// ── Binance Fetch ─────────────────────────────────────────────────────
+async function fetchOHLCV(symbol,interval,limit=300){
+  const url=`https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=${interval}&limit=${limit}`;
+  const r=await fetch(url);
+  if(!r.ok)throw new Error(`HTTP ${r.status}`);
+  const data=await r.json();
+  if(!Array.isArray(data)||data.length===0)throw new Error('dati vuoti');
+  return{t:data.map(d=>+d[0]),o:data.map(d=>+d[1]),h:data.map(d=>+d[2]),l:data.map(d=>+d[3]),c:data.map(d=>+d[4]),v:data.map(d=>+d[5])};
+}
+
+// ── Yahoo Finance Fetch ───────────────────────────────────────────────
+function resampleOHLCV(df,n){
+  const out={t:[],o:[],h:[],l:[],c:[],v:[]};
+  for(let i=0;i+n-1<df.c.length;i+=n){
+    out.t.push(df.t[i]);out.o.push(df.o[i]);
+    out.h.push(Math.max(...df.h.slice(i,i+n)));
+    out.l.push(Math.min(...df.l.slice(i,i+n)));
+    out.c.push(df.c[i+n-1]);
+    out.v.push(df.v.slice(i,i+n).reduce((a,b)=>a+(b||0),0));
+  }
+  return out;
+}
+async function fetchYahoo(symbol,interval){
+  const MAP={'5m':{yi:'5m',yr:'5d'},'15m':{yi:'15m',yr:'60d'},'1h':{yi:'60m',yr:'90d'},'4h':{yi:'60m',yr:'90d'},'1d':{yi:'1d',yr:'2y'}};
+  const{yi,yr}=MAP[interval]||MAP['1h'];
+  const base=`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?interval=${yi}&range=${yr}`;
+  const attempts=[base,base.replace('query1','query2'),`https://corsproxy.io/?${encodeURIComponent(base)}`,`https://api.allorigins.win/raw?url=${encodeURIComponent(base)}`];
+  let lastErr;
+  for(const url of attempts){
+    try{
+      const r=await fetch(url);
+      if(!r.ok)throw new Error(`YF HTTP ${r.status}`);
+      const data=await r.json();
+      if(!data.chart||!data.chart.result)throw new Error('YF no data');
+      const res=data.chart.result[0];
+      const ts=res.timestamp,q=res.indicators.quote[0];
+      const valid=ts.map((_,i)=>q.close[i]!=null);
+      const df={t:ts.filter((_,i)=>valid[i]).map(t=>t*1000),o:q.open.filter((_,i)=>valid[i]),h:q.high.filter((_,i)=>valid[i]),l:q.low.filter((_,i)=>valid[i]),c:q.close.filter((_,i)=>valid[i]),v:(q.volume||ts.map(()=>0)).filter((_,i)=>valid[i])};
+      if(interval==='4h')return resampleOHLCV(df,4);
+      return df;
+    }catch(e){lastErr=e;}
+  }
+  throw lastErr;
+}
+
+// ── Config ────────────────────────────────────────────────────────────
+const LIVE_ASSETS=[
+  {label:'BTC',  sym:'BTCUSDT'},
+  {label:'ETH',  sym:'ETHUSDT'},
+  {label:'BNB',  sym:'BNBUSDT'},
+  {label:'SOL',  sym:'SOLUSDT'},
+  {label:'XRP',  sym:'XRPUSDT'},
+  {label:'ADA',  sym:'ADAUSDT'},
+  {label:'AVAX', sym:'AVAXUSDT'},
+  {label:'DOGE', sym:'DOGEUSDT'},
+  {label:'LINK', sym:'LINKUSDT'},
+  {label:'LTC',  sym:'LTCUSDT'},
+  {label:'DOT',  sym:'DOTUSDT'},
+  {label:'MATIC',sym:'MATICUSDT'},
+];
+const TRAD_ASSETS=[
+  {label:'S&P 500', sym:'ES=F',  source:'yahoo'},
+  {label:'Nasdaq',  sym:'NQ=F',  source:'yahoo'},
+  {label:'Gold',    sym:'GC=F',  source:'yahoo'},
+  {label:'Silver',  sym:'SI=F',  source:'yahoo'},
+  {label:'Oil WTI', sym:'CL=F',  source:'yahoo'},
+];
+const LIVE_TFS=['5m','15m','1h','4h','1d'];
+let lastData=[];
+let activeFilter='all';
+
+// ── Render ────────────────────────────────────────────────────────────
+function fmtP(p){
+  if(p>=10000)return '$'+Math.round(p).toLocaleString('en-US');
+  if(p>=100)return '$'+p.toFixed(2);
+  if(p>=10)return '$'+p.toFixed(2);
+  if(p>=1)return '$'+p.toFixed(3);
+  return '$'+p.toFixed(5);
+}
+
+function cellHtml(h,loading){
+  if(loading&&!h)return'<span style="color:#334155;font-size:10px;">⟳</span>';
+  if(!h||h.dir==='NEUTRAL')return'<span class="cell neutral">─</span>';
+  if(h.score<50)return'<span class="cell neutral">─</span>';
+  const intensity=h.score>=75?'font-weight:800;':'opacity:0.85;';
+  if(h.dir==='LONG')return`<span class="cell long" style="${intensity}">▲ ${h.score}%</span>`;
+  return`<span class="cell short" style="${intensity}">▼ ${h.score}%</span>`;
+}
+
+function alignHtml(tfs,loading){
+  const loaded=tfs.filter(h=>h!==undefined).length;
+  if(loaded===0&&loading)return'<span style="color:#334155;font-size:11px;">⟳ caric.</span>';
+  const l=tfs.filter(h=>h&&h.dir==='LONG').length;
+  const s=tfs.filter(h=>h&&h.dir==='SHORT').length;
+  if(l>=4)return`<span class="align-long">▲ LONG ${l}/${tfs.length}</span>`;
+  if(s>=4)return`<span class="align-short">▼ SHORT ${s}/${tfs.length}</span>`;
+  if(l===0&&s===0)return`<span class="align-weak">─ neutro</span>`;
+  const dom=l>=s?'LONG':'SHORT',cnt=Math.max(l,s);
+  return`<span class="align-weak">${dom==='LONG'?'▲':'▼'} ${cnt}/${tfs.length}</span>`;
+}
+
+function renderMatrix(rows){
+  const tbody=document.getElementById('signal-tbody'),tfoot=document.getElementById('signal-tfoot');
+  if(!tbody)return;
+  const totals=LIVE_TFS.map(()=>({l:0,s:0}));
+  let html='';
+  for(const row of rows){
+    if(row.separator){
+      html+=`<tr><td colspan="7" style="background:#080d1a;padding:6px 16px;font-size:10px;color:#3b82f6;font-weight:700;letter-spacing:.06em;border-top:2px solid #1e293b;border-bottom:1px solid #1e293b;">${row.label}</td></tr>`;
+      continue;
+    }
+    if(activeFilter==='long'&&row.align!=='LONG')continue;
+    if(activeFilter==='short'&&row.align!=='SHORT')continue;
+    if(activeFilter==='aligned'&&!['LONG','SHORT'].includes(row.align))continue;
+    const pr=row.price?fmtP(row.price):'—';
+    const vr=row.volRatio;const volStr=vr?` <span style="font-size:9px;color:${vr>1.5?'#22c55e':vr>0.8?'#64748b':'#ef4444'};">Vol×${vr.toFixed(1)}</span>`:'';
+    const suffix=row.trad?'':' USDT';
+    html+=`<tr><td style="text-align:left;padding-left:16px;"><span class="asset-name">${row.label}${suffix}</span><span class="asset-price">${pr}${volStr}</span></td><td>${alignHtml(row.tfs,row.loading)}</td>`;
+    for(let j=0;j<LIVE_TFS.length;j++){
+      const h=row.tfs[j];
+      if(h&&h.dir==='LONG')totals[j].l++;else if(h&&h.dir==='SHORT')totals[j].s++;
+      html+=`<td>${cellHtml(h,row.loading)}</td>`;
+    }
+    html+='</tr>';
+  }
+  if(!html)html='<tr><td colspan="7" style="text-align:center;padding:20px;color:#64748b;">Nessun asset con questo filtro</td></tr>';
+  tbody.innerHTML=html;
+  if(tfoot){
+    let tf='<tr style="background:#0d1526;"><td style="text-align:left;padding-left:16px;font-size:11px;color:#475569;padding:8px 6px;">Totale</td><td></td>';
+    for(const t of totals)tf+=`<td style="font-size:11px;"><span style="color:#4ade80;">${t.l}L</span> <span style="color:#f87171;">${t.s}S</span></td>`;
+    tfoot.innerHTML=tf+'</tr>';
+  }
+}
+
+// ── Aggiornamento ─────────────────────────────────────────────────────
+async function refreshSignals(){
+  const st=document.getElementById('signal-status');
+  if(st)st.innerHTML='<span style="color:#3b82f6;">⟳ Aggiornamento segnali live...</span>';
+  const rows=[];
+
+  // Crypto (Binance)
+  for(const asset of LIVE_ASSETS){
+    const row={label:asset.label,price:null,tfs:[],align:null,loading:true};
+    rows.push(row);
+    renderMatrix(rows);
+    for(const tf of LIVE_TFS){
+      try{
+        const df=await fetchOHLCV(asset.sym,tf,300);
+        if(!row.price&&df.c.length>0){
+          row.price=df.c[df.c.length-1];
+          const vn=df.v.length,vm=smaVol(df.v);
+          if(vm[vn-2]&&df.v[vn-2])row.volRatio=df.v[vn-2]/vm[vn-2];
+        }
+        const votes=computeVotes(df);
+        row.tfs.push(votes?hybrid(votes):null);
+      }catch(e){
+        row.tfs.push(null);
+      }
+      await new Promise(r=>setTimeout(r,100));
+    }
+    row.loading=false;
+    const l=row.tfs.filter(h=>h&&h.dir==='LONG').length,s=row.tfs.filter(h=>h&&h.dir==='SHORT').length;
+    if(l>=4)row.align='LONG';else if(s>=4)row.align='SHORT';else row.align=null;
+    renderMatrix(rows);
+  }
+
+  // Separatore visivo
+  rows.push({separator:true,label:'📊 MERCATI TRADIZIONALI — S&P500 · Nasdaq · Oro · Argento · Petrolio · Yahoo Finance'});
+  renderMatrix(rows);
+
+  // Mercati tradizionali (Yahoo Finance)
+  for(const asset of TRAD_ASSETS){
+    const row={label:asset.label,price:null,tfs:[],align:null,loading:true,trad:true};
+    rows.push(row);
+    renderMatrix(rows);
+    for(const tf of LIVE_TFS){
+      try{
+        const df=await fetchYahoo(asset.sym,tf);
+        if(!row.price&&df.c.length>0)row.price=df.c[df.c.length-1];
+        const votes=computeVotes(df);
+        row.tfs.push(votes?hybrid(votes):null);
+      }catch(e){
+        row.tfs.push(null);
+      }
+      await new Promise(r=>setTimeout(r,200));
+    }
+    row.loading=false;
+    const l=row.tfs.filter(h=>h&&h.dir==='LONG').length,s=row.tfs.filter(h=>h&&h.dir==='SHORT').length;
+    if(l>=4)row.align='LONG';else if(s>=4)row.align='SHORT';else row.align=null;
+    renderMatrix(rows);
+  }
+
+  lastData=rows;
+  const ts=new Date().toLocaleTimeString('it-IT',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  if(st)st.innerHTML=`Ultimo aggiornamento: <strong style="color:#e2e8f0;">${ts}</strong> · Prossimo aggiornamento tra 60s · <a href="javascript:void(0)" onclick="refreshSignals()" style="color:#3b82f6;">Aggiorna ora</a>`;
+}
+
+// ── Filtri ────────────────────────────────────────────────────────────
+document.querySelectorAll('.pill').forEach(pill=>{
+  pill.addEventListener('click',()=>{
+    document.querySelectorAll('.pill').forEach(p=>p.classList.remove('on'));
+    pill.classList.add('on');
+    const t=pill.textContent.trim().toLowerCase();
+    if(t.includes('long'))activeFilter='long';
+    else if(t.includes('short'))activeFilter='short';
+    else if(t.includes('allin'))activeFilter='aligned';
+    else activeFilter='all';
+    renderMatrix(lastData);
+  });
+});
+
+// ── Orologio ──────────────────────────────────────────────────────────
+function updateClock(){
+  const cet=new Date(new Date().toLocaleString("en-US",{timeZone:"Europe/Rome"}));
+  const h=String(cet.getHours()).padStart(2,"0"),m=String(cet.getMinutes()).padStart(2,"0"),s=String(cet.getSeconds()).padStart(2,"0");
+  const el=document.getElementById("live-clock");
+  if(el)el.textContent=`${h}:${m}:${s}`;
+  const hr=cet.getHours()+cet.getMinutes()/60;
+  let session="",color="#64748b";
+  if(hr>=14&&hr<17){session="⚡ Overlap Londra/NY — Massima volatilità";color="#60a5fa";}
+  else if(hr>=14.5&&hr<23){session="🗽 Sessione New York — Alta volatilità";color="#22c55e";}
+  else if(hr>=8&&hr<17){session="🇬🇧 Sessione Londra — Alta volatilità";color="#22c55e";}
+  else if(hr>=1&&hr<9){session="🌏 Sessione Tokyo — Volatilità media";color="#f59e0b";}
+  else{session="🌙 Sessione notturna — Bassa volatilità";color="#475569";}
+  const sn=document.getElementById("session-name");
+  if(sn){sn.textContent=session;sn.style.color=color;}
+  const rowMap={overlap:"row-overlap",ny:"row-newyork",london:"row-london",tokyo:"row-tokyo",night:"row-night"};
+  let ak="night";
+  if(hr>=14&&hr<17)ak="overlap";else if(hr>=14.5&&hr<23)ak="ny";else if(hr>=8&&hr<17)ak="london";else if(hr>=1&&hr<9)ak="tokyo";
+  Object.values(rowMap).forEach(id=>{const r=document.getElementById(id);if(r)r.style.background="";});
+  const ar=document.getElementById(rowMap[ak]);if(ar)ar.style.background="rgba(59,130,246,.1)";
+}
+setInterval(updateClock,1000);
+updateClock();
+
+// ── Report Multi-Periodo ──────────────────────────────────────────────
+const REPORT_TFS=[
+  {key:'1d',limit:300},
+  {key:'1w',limit:300},
+  {key:'1M',limit:120},
+];
+
+function biasHtml(sigs){
+  const l=sigs.filter(h=>h&&h.dir==='LONG').length,s=sigs.filter(h=>h&&h.dir==='SHORT').length;
+  if(l===3)return'<span style="background:rgba(34,197,94,.25);color:#4ade80;border:1px solid rgba(34,197,94,.4);border-radius:6px;padding:3px 12px;font-size:11px;font-weight:800;">▲ BULL FORTE</span>';
+  if(s===3)return'<span style="background:rgba(239,68,68,.25);color:#f87171;border:1px solid rgba(239,68,68,.4);border-radius:6px;padding:3px 12px;font-size:11px;font-weight:800;">▼ BEAR FORTE</span>';
+  if(l===2)return'<span style="background:rgba(34,197,94,.12);color:#4ade80;border:1px solid rgba(34,197,94,.25);border-radius:6px;padding:3px 12px;font-size:11px;font-weight:700;">▲ BULLISH</span>';
+  if(s===2)return'<span style="background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.25);border-radius:6px;padding:3px 12px;font-size:11px;font-weight:700;">▼ BEARISH</span>';
+  return'<span style="background:rgba(71,85,105,.1);color:#64748b;border:1px solid rgba(71,85,105,.3);border-radius:6px;padding:3px 12px;font-size:11px;font-weight:700;">─ NEUTRO</span>';
+}
+
+function renderReport(rows){
+  const tbody=document.getElementById('report-tbody');
+  if(!tbody)return;
+  let html='';
+  for(const row of rows){
+    if(row.separator||row.trad)continue;
+    html+=`<tr><td style="text-align:left;padding-left:16px;"><span class="asset-name">${row.label} USDT</span></td>`;
+    for(let j=0;j<REPORT_TFS.length;j++){
+      const h=row.sigs[j],loading=row.loading&&row.sigs[j]===undefined;
+      html+=`<td>${cellHtml(h,loading)}</td>`;
+    }
+    html+=`<td>${biasHtml(row.sigs)}</td></tr>`;
+  }
+  tbody.innerHTML=html||'<tr><td colspan="5" style="text-align:center;padding:20px;color:#64748b;">Nessun dato</td></tr>';
+  // summary bar
+  const sm=document.getElementById('report-summary');
+  if(sm&&rows.some(r=>!r.loading)){
+    const done=rows.filter(r=>!r.loading);
+    const bull=done.filter(r=>{const l=r.sigs.filter(h=>h&&h.dir==='LONG').length;return l>=2;}).length;
+    const bear=done.filter(r=>{const s=r.sigs.filter(h=>h&&h.dir==='SHORT').length;return s>=2;}).length;
+    const strongest=done.reduce((best,r)=>{const sc=r.sigs.reduce((a,h)=>a+(h&&h.dir==='LONG'?h.score:0),0);return sc>best.sc?{label:r.label,sc}:best},{label:'—',sc:0});
+    sm.innerHTML=`<span style="background:#111827;border:1px solid #1e293b;border-radius:6px;padding:5px 12px;color:#4ade80;">▲ Bullish: <strong>${bull}</strong></span><span style="background:#111827;border:1px solid #1e293b;border-radius:6px;padding:5px 12px;color:#f87171;">▼ Bearish: <strong>${bear}</strong></span><span style="background:#111827;border:1px solid #1e293b;border-radius:6px;padding:5px 12px;color:#94a3b8;">Asset più forte: <strong style="color:#e2e8f0;">${strongest.label}</strong></span>`;
+  }
+}
+
+async function refreshReport(){
+  const rows=[];
+  for(const asset of LIVE_ASSETS){
+    const row={label:asset.label,sigs:[],loading:true};
+    rows.push(row);renderReport(rows);
+    for(const rtf of REPORT_TFS){
+      try{
+        const df=await fetchOHLCV(asset.sym,rtf.key,rtf.limit);
+        const votes=computeVotes(df);
+        row.sigs.push(votes?hybrid(votes):null);
+      }catch(e){row.sigs.push(null);}
+      await new Promise(r=>setTimeout(r,100));
+    }
+    row.loading=false;renderReport(rows);
+  }
+}
+
+// ── Init ──────────────────────────────────────────────────────────────
+refreshSignals();
+setInterval(refreshSignals,60000);
+refreshReport();
+setInterval(refreshReport,300000);
+</script>
+</body>
+</html>

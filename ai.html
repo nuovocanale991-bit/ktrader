@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KTrader AI — Analisi di Mercato Gratuita</title>
+<meta name="description" content="Chiedi analisi tecnica su BTC, ETH, SOL e qualsiasi asset. Supporti, resistenze, trend, indicatori. Gratuito, nessun account richiesto.">
+<link rel="canonical" href="https://nuovocanale991-bit.github.io/ktrader/ai.html">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#0a0f1e;color:#e2e8f0;font-family:'Segoe UI',system-ui,sans-serif;line-height:1.6}
+a{color:#60a5fa;text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:760px;margin:0 auto;padding:0 20px}
+nav{background:#0d1526;border-bottom:1px solid #1e293b;position:sticky;top:0;z-index:100}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;max-width:1100px;margin:0 auto;gap:10px}
+.nav-logo{font-weight:800;font-size:20px;color:#fff;display:flex;align-items:center;gap:8px;text-decoration:none}
+.nav-logo:hover{text-decoration:none}
+.nav-logo span{color:#3b82f6}
+.nav-links{display:flex;gap:4px;font-size:14px;align-items:center}
+.nav-links a{color:#94a3b8;padding:6px 10px;border-radius:6px;transition:color .15s,background .15s}
+.nav-links a:hover{color:#fff;text-decoration:none;background:#1e293b}
+.nav-item{position:relative}
+.nav-item>a{display:flex;align-items:center;gap:4px}
+.nav-item>a::after{content:'▾';font-size:10px;opacity:.6;transition:transform .2s}
+.nav-item:hover>a::after{transform:rotate(180deg)}
+.dropdown{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%) translateY(-6px);background:#0d1526;border:1px solid #1e293b;border-radius:14px;padding:16px;opacity:0;visibility:hidden;transition:opacity .18s,transform .18s;z-index:200;box-shadow:0 20px 60px rgba(0,0,0,.6);pointer-events:none}
+.nav-item:hover .dropdown,.nav-item.is-open .dropdown{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0);pointer-events:auto}
+.nav-item.is-open>a::after{transform:rotate(180deg)}
+.dd-bots{min-width:480px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dd-bot-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;border:1px solid transparent;transition:background .15s,border-color .15s;text-decoration:none!important}
+.dd-bot-item:hover{background:#1e293b;border-color:#334155;text-decoration:none!important}
+.dd-bot-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.dd-bot-info{display:flex;flex-direction:column;gap:1px}
+.dd-bot-name{font-size:13px;font-weight:600;color:#e2e8f0}
+.dd-bot-meta{font-size:11px;color:#64748b}
+.dd-bot-stat{font-size:11px;font-weight:700;color:#22c55e}
+.dd-segnali{min-width:300px;display:flex;flex-direction:column;gap:6px}
+.dd-sig-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;border:1px solid transparent;transition:background .15s;text-decoration:none!important;color:#e2e8f0}
+.dd-sig-item:hover{background:#1e293b;border-color:#334155;text-decoration:none!important}
+.dd-header{font-size:11px;font-weight:700;color:#475569;letter-spacing:.6px;padding:0 4px;margin-bottom:2px}
+.dd-separator{height:1px;background:#1e293b;margin:6px 0;grid-column:1/-1}
+.btn{display:inline-block;padding:10px 22px;border-radius:8px;font-weight:700;font-size:14px;cursor:pointer;border:none;transition:opacity .15s;text-align:center}
+.btn-primary{background:#3b82f6;color:#fff}
+.btn-primary:hover{opacity:.85;text-decoration:none}
+.ai-hero{padding:40px 20px 24px;text-align:center;background:radial-gradient(ellipse at 50% 0%,#1a3a6033 0%,transparent 70%)}
+.ai-hero h1{font-size:clamp(22px,4vw,30px);font-weight:900;color:#fff;margin-bottom:8px}
+.ai-hero p{font-size:14px;color:#94a3b8;max-width:480px;margin:0 auto}
+.ai-badge{display:inline-block;background:#22c55e22;color:#4ade80;border:1px solid #22c55e44;border-radius:99px;font-size:11px;font-weight:700;padding:3px 10px;margin-bottom:12px}
+/* MARKET TICKER */
+.market-ticker{background:#0d1526;border:1px solid #1e293b;border-radius:10px;padding:10px 16px;margin-top:16px;display:flex;gap:16px;flex-wrap:wrap;font-size:12px;align-items:center;min-height:38px}
+.ticker-item{display:flex;align-items:center;gap:6px}
+.ticker-label{color:#475569;font-weight:600}
+.ticker-price{color:#e2e8f0;font-weight:700}
+.ticker-rsi{font-size:11px;padding:2px 6px;border-radius:4px;font-weight:600}
+.rsi-ob{background:#ef444422;color:#f87171}
+.rsi-os{background:#22c55e22;color:#4ade80}
+.rsi-neutral{background:#1e293b;color:#94a3b8}
+.ticker-loading{color:#475569;font-size:12px;animation:pulse 1.5s infinite}
+/* CHAT */
+.chat-wrap{background:#111827;border:1px solid #1e293b;border-radius:16px;overflow:hidden;margin-top:16px}
+.chat-header{background:#0d1526;padding:11px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid #1e293b}
+.ai-dot{width:8px;height:8px;border-radius:50%;background:#4ade80;flex-shrink:0;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.chat-header-text{font-size:13px;font-weight:600;color:#e2e8f0}
+.rate-bar{padding:7px 16px;background:#0a0f1e;border-bottom:1px solid #1e293b;font-size:11px;color:#475569;display:flex;justify-content:space-between;align-items:center}
+.chat-window{height:360px;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;scroll-behavior:smooth}
+.msg{display:flex;gap:10px;max-width:88%}
+.msg.user{flex-direction:row-reverse;align-self:flex-end}
+.msg-bubble{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.65;word-break:break-word}
+.msg.ai .msg-bubble{background:#1e293b;color:#e2e8f0;border-radius:4px 12px 12px 12px}
+.msg.user .msg-bubble{background:#1d4ed8;color:#fff;border-radius:12px 4px 12px 12px}
+.msg-avatar{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;margin-top:2px}
+.msg.ai .msg-avatar{background:#1e3a5f;border:1px solid #2d4a7a}
+.msg.user .msg-avatar{background:#1d4ed8}
+.typing-dots span{display:inline-block;width:6px;height:6px;border-radius:50%;background:#60a5fa;margin:0 2px;animation:bounce .8s infinite}
+.typing-dots span:nth-child(2){animation-delay:.15s}
+.typing-dots span:nth-child(3){animation-delay:.3s}
+@keyframes bounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
+.quick-prompts{padding:10px 16px;border-top:1px solid #0a0f1e;display:flex;gap:8px;flex-wrap:wrap}
+.qp-btn{background:#1e293b;border:1px solid #334155;color:#94a3b8;font-size:12px;padding:5px 12px;border-radius:99px;cursor:pointer;transition:all .15s;white-space:nowrap;font-family:inherit}
+.qp-btn:hover{background:#2d3f55;border-color:#475569;color:#e2e8f0}
+.chat-input-row{display:flex;gap:8px;padding:12px 16px;border-top:1px solid #1e293b;background:#0d1526}
+#user-input{flex:1;background:#1e293b;border:1px solid #334155;border-radius:8px;padding:9px 14px;color:#e2e8f0;font-size:14px;outline:none;font-family:inherit;transition:border-color .15s}
+#user-input:focus{border-color:#3b82f6}
+#user-input::placeholder{color:#475569}
+#user-input:disabled{opacity:.5}
+#send-btn{background:#3b82f6;color:#fff;border:none;border-radius:8px;padding:9px 18px;font-weight:700;font-size:13px;cursor:pointer;transition:opacity .15s;white-space:nowrap;font-family:inherit}
+#send-btn:hover{opacity:.85}
+#send-btn:disabled{opacity:.4;cursor:not-allowed}
+.setup-notice{background:#1a2535;border:1px dashed #2d4a7a;border-radius:10px;padding:16px 20px;margin-top:16px;font-size:13px;color:#94a3b8}
+.setup-notice code{background:#0d1526;padding:2px 6px;border-radius:4px;font-size:12px;color:#fbbf24;font-family:monospace}
+footer{background:#0d1526;border-top:1px solid #1e293b;padding:24px 20px;text-align:center;font-size:13px;color:#475569}
+@media(max-width:600px){.nav-links{display:none}.chat-window{height:300px}.market-ticker{gap:10px}}
+/* ── UPGRADE MODAL ── */
+.upgrade-overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);backdrop-filter:blur(5px);z-index:9999;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.upgrade-overlay.is-open{opacity:1;visibility:visible}
+.upgrade-dialog{background:#111827;border:1px solid #1e3a5f;border-radius:18px;padding:34px 28px 28px;max-width:370px;width:100%;text-align:center;transform:scale(.9) translateY(10px);transition:transform .28s cubic-bezier(.34,1.56,.64,1);box-shadow:0 30px 90px rgba(0,0,0,.7),0 0 0 1px #1e3a5f40}
+.upgrade-overlay.is-open .upgrade-dialog{transform:scale(1) translateY(0)}
+.upgrade-icon{font-size:38px;margin-bottom:14px;line-height:1}
+.upgrade-title{font-size:19px;font-weight:800;color:#fff;margin-bottom:10px;letter-spacing:-.3px}
+.upgrade-text{font-size:13px;color:#94a3b8;line-height:1.65;margin-bottom:26px}
+.upgrade-text strong{color:#e2e8f0}
+.upgrade-actions{display:flex;flex-direction:column;gap:10px}
+.upgrade-btn-primary{background:linear-gradient(135deg,#3b82f6 0%,#1d4ed8 100%);color:#fff;border:none;border-radius:10px;padding:14px 20px;font-size:14px;font-weight:700;cursor:pointer;letter-spacing:.2px;transition:opacity .15s,transform .1s,box-shadow .15s;font-family:inherit;box-shadow:0 4px 16px rgba(59,130,246,.35)}
+.upgrade-btn-primary:hover{opacity:.92;transform:translateY(-2px);box-shadow:0 6px 20px rgba(59,130,246,.45)}
+.upgrade-btn-close{background:transparent;color:#475569;border:1px solid #1e293b;border-radius:10px;padding:10px 20px;font-size:13px;font-weight:600;cursor:pointer;transition:color .15s,border-color .15s;font-family:inherit}
+.upgrade-btn-close:hover{color:#94a3b8;border-color:#334155}
+/* overlay trasparente che cattura i click quando il limite è raggiunto */
+.chat-wrap{position:relative}
+.chat-input-blocker{display:none;position:absolute;bottom:0;left:0;right:0;height:130px;z-index:50;cursor:not-allowed;background:transparent}
+.limit-hit #user-input{cursor:not-allowed}
+.limit-hit .qp-btn{opacity:.45;cursor:not-allowed}
+</style>
+<style>/* ── KTRADER SPACE SKIN ── */
+body{background:#04070f!important}
+body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(1100px 540px at 85% -10%,rgba(59,130,246,.12),transparent 60%),radial-gradient(900px 500px at -5% 110%,rgba(34,211,238,.06),transparent 60%),repeating-linear-gradient(0deg,transparent 0 47px,rgba(99,140,255,.028) 47px 48px),repeating-linear-gradient(90deg,transparent 0 47px,rgba(99,140,255,.028) 47px 48px)}
+::selection{background:rgba(59,130,246,.4);color:#fff}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:#060a14}
+::-webkit-scrollbar-thumb{background:#1a2742;border-radius:5px}
+::-webkit-scrollbar-thumb:hover{background:#24365c}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">K<span>TRADER</span></a>
+    <div class="nav-links">
+      <div class="nav-item">
+        <a href="index.html#bot">I Bot</a>
+        <div class="dropdown dd-bots">
+          <div style="grid-column:1/-1;margin-bottom:4px;" class="dd-header">BOT ALGORITMICI</div>
+          <a href="bot/trend-rider.html" class="dd-bot-item">
+            <div class="dd-bot-icon" style="background:#052e16;">📈</div>
+            <div class="dd-bot-info"><span class="dd-bot-name">Trend Rider</span><span class="dd-bot-meta">BTC/ETH/SOL · 4h</span><span class="dd-bot-stat">+10.3% CAGR</span></div>
+          </a>
+          <a href="bot/eth-v4.html" class="dd-bot-item">
+            <div class="dd-bot-icon" style="background:#0d1f3c;">⟠</div>
+            <div class="dd-bot-info"><span class="dd-bot-name">ETH V4 15m</span><span class="dd-bot-meta">ETHUSDT · 15m</span><span class="dd-bot-stat">+232% netto</span></div>
+          </a>
+          <a href="bot/sol-v2.html" class="dd-bot-item">
+            <div class="dd-bot-icon" style="background:#1a0533;">◎</div>
+            <div class="dd-bot-info"><span class="dd-bot-name">SOL V2 15m</span><span class="dd-bot-meta">SOLUSDT · 15m</span><span class="dd-bot-stat">+41% netto</span></div>
+          </a>
+          <a href="bot/ut-bot-4h.html" class="dd-bot-item">
+            <div class="dd-bot-icon" style="background:#1c1003;">🔄</div>
+            <div class="dd-bot-info"><span class="dd-bot-name">UT Bot 4h</span><span class="dd-bot-meta">BTCUSDT · 4h</span><span class="dd-bot-stat">+257% 24 mesi</span></div>
+          </a>
+          <a href="bot/zec-scalp.html" class="dd-bot-item">
+            <div class="dd-bot-icon" style="background:#1a1a03;">⚡</div>
+            <div class="dd-bot-info"><span class="dd-bot-name">ZEC Scalp V3</span><span class="dd-bot-meta">ZECUSDT · 5m</span><span class="dd-bot-stat">+91.6% lordo</span></div>
+          </a>
+          <a href="index.html#bot" class="dd-bot-item" style="grid-column:1/-1;justify-content:center;color:#3b82f6;font-size:13px;font-weight:600;">Vedi tutti →</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="segnali.html">Sala Segnali</a>
+        <div class="dropdown dd-segnali">
+          <div class="dd-header">SEGNALI LIVE</div>
+          <a href="segnali.html" class="dd-sig-item"><div class="dd-bot-icon" style="background:#0a1628;font-size:18px;">🔵</div><div class="dd-bot-info"><span class="dd-bot-name">Crypto</span><span class="dd-bot-meta">BTC, ETH, SOL, XRP + 8 altri</span></div></a>
+          <a href="mercati-tradizionali.html" class="dd-sig-item"><div class="dd-bot-icon" style="background:#0a1e0a;font-size:18px;">📈</div><div class="dd-bot-info"><span class="dd-bot-name">Mercati Tradizionali</span><span class="dd-bot-meta">S&amp;P500, Nasdaq, DAX + altri</span></div></a>
+          <a href="materie-prime.html" class="dd-sig-item"><div class="dd-bot-icon" style="background:#1a1003;font-size:18px;">🛢️</div><div class="dd-bot-info"><span class="dd-bot-name">Materie Prime</span><span class="dd-bot-meta">Oro, Argento, Petrolio, Rame</span></div></a>
+          <a href="forex.html" class="dd-sig-item"><div class="dd-bot-icon" style="background:#110a1f;font-size:18px;">💱</div><div class="dd-bot-info"><span class="dd-bot-name">Forex</span><span class="dd-bot-meta">EUR/USD, GBP/USD + 5 major</span></div></a>
+          <div class="dd-separator"></div>
+          <a href="segnali.html" style="display:block;text-align:center;font-size:13px;font-weight:600;color:#3b82f6;padding:6px 0;text-decoration:none;">Sala Segnali LIVE →</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="chiamate.html">Chiamate</a>
+        <div class="dropdown dd-segnali">
+          <div class="dd-header">CHIAMATE LIVE</div>
+          <a href="chiamate.html" class="dd-sig-item"><div class="dd-bot-icon" style="background:#0a1628;font-size:18px;">🔵</div><div class="dd-bot-info"><span class="dd-bot-name">Crypto</span><span class="dd-bot-meta">BTC, ETH, SOL + 9 altri</span></div></a>
+          <a href="chiamate-tradizionali.html" class="dd-sig-item"><div class="dd-bot-icon" style="background:#0a1e0a;font-size:18px;">📈</div><div class="dd-bot-info"><span class="dd-bot-name">Mercati Tradizionali</span><span class="dd-bot-meta">S&amp;P500, Nasdaq, DAX, Nikkei</span></div></a>
+          <a href="chiamate-materie-prime.html" class="dd-sig-item"><div class="dd-bot-icon" style="background:#1a1003;font-size:18px;">🛢️</div><div class="dd-bot-info"><span class="dd-bot-name">Materie Prime</span><span class="dd-bot-meta">Oro, Argento, Petrolio, Rame</span></div></a>
+          <a href="chiamate-forex.html" class="dd-sig-item"><div class="dd-bot-icon" style="background:#110a1f;font-size:18px;">💱</div><div class="dd-bot-info"><span class="dd-bot-name">Forex</span><span class="dd-bot-meta">EUR/USD, GBP/USD + 5 major</span></div></a>
+          <div class="dd-separator"></div>
+          <a href="chiamate.html" style="display:block;text-align:center;font-size:13px;font-weight:600;color:#3b82f6;padding:6px 0;text-decoration:none;">Tutte le Chiamate →</a>
+        </div>
+      </div>
+      <a href="calendario.html">Calendario</a>
+      <a href="ai.html" style="color:#3b82f6;font-weight:700;">Agent AI</a>
+      <a href="pricing.html">Prezzi</a>
+      <a href="https://t.me/GIO33BOT" target="_blank" rel="noopener">Telegram</a>
+    </div>
+    <a href="pricing.html" class="btn btn-primary">Piani →</a>
+  </div>
+</nav>
+
+<main>
+  <div class="ai-hero">
+    <div class="container">
+      <div class="ai-badge">Agent AI · Dati live · Nessun account richiesto</div>
+      <h1>KTrader Agent AI — Analisi di Mercato</h1>
+      <p>Chiedi analisi tecnica su qualsiasi asset crypto. Prezzi live, RSI, trend, supporti e resistenze — risposta in italiano in secondi.</p>
+    </div>
+  </div>
+
+  <div class="container" style="padding-bottom:48px;">
+
+    <!-- MARKET TICKER LIVE -->
+    <div class="market-ticker" id="market-ticker">
+      <span class="ticker-loading">⏳ Caricamento dati live...</span>
+    </div>
+
+    <div class="chat-wrap">
+      <div class="chat-header">
+        <div class="ai-dot"></div>
+        <div class="chat-header-text">KTrader AI · Analisi Tecnica Live</div>
+        <div style="margin-left:auto;font-size:11px;color:#475569;">llama-3.3-70b</div>
+      </div>
+      <div class="rate-bar">
+        <span>Domande oggi: <strong id="rate-used">0</strong> / <strong id="rate-limit">5</strong></span>
+        <span id="rate-msg" style="color:#64748b;"></span>
+      </div>
+      <div class="chat-window" id="chat-window"></div>
+      <div class="quick-prompts">
+        <button class="qp-btn" onclick="sendQuick('Analisi tecnica BTC adesso: trend attuale, supporti e resistenze chiave, RSI e segnale operativo.')">📊 BTC live</button>
+        <button class="qp-btn" onclick="sendQuick('Analisi tecnica ETH adesso: trend, livelli chiave, momentum e bias direzionale.')">🔵 ETH live</button>
+        <button class="qp-btn" onclick="sendQuick('Analisi tecnica SOL adesso: struttura del prezzo, supporti, bias direzionale.')">🟣 SOL live</button>
+        <button class="qp-btn" onclick="sendQuick('Guardando i dati live dei bot KTrader (Trend Rider 4h, ETH V4 15m, UT Bot 4h), quale asset ha il setup migliore adesso?')">🤖 Setup bot</button>
+        <button class="qp-btn" onclick="sendQuick('Come impostare un trade su futures con RSI + EMA200? Entry, stop-loss e target con i prezzi attuali di BTC.')">📚 Setup RSI+EMA</button>
+        <button class="qp-btn" onclick="sendQuick('Qual è il sentiment generale del mercato crypto adesso? Analizza BTC, ETH e SOL e dimmi bull o bear.')">🌡️ Sentiment</button>
+      </div>
+      <div class="chat-input-row">
+        <input type="text" id="user-input" placeholder="Es: analisi BTC adesso, livelli ETH, il Trend Rider è long o short?" maxlength="400" autocomplete="off">
+        <button id="send-btn" onclick="handleSend()">Invia →</button>
+      </div>
+      <!-- overlay che intercetta i click su input/send disabilitati -->
+      <div class="chat-input-blocker" id="chat-input-blocker"></div>
+    </div>
+
+    <div id="setup-notice" class="setup-notice" style="display:none;">
+      ⚙️ <strong>Chiave API mancante</strong> — vai su <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" style="color:#60a5fa;">aistudio.google.com</a>, crea una chiave gratuita (nessuna carta) e incollala in <code>API_KEY</code> nel file <code>ai.html</code>.
+    </div>
+
+    <div style="margin-top:14px;background:#111827;border:1px solid #1e293b;border-radius:10px;padding:13px 18px;font-size:12px;color:#475569;">
+      <strong>Avvertenza:</strong> L'AI fornisce analisi tecnica educativa, non consulenza finanziaria. Il trading su futures comporta rischio elevato di perdita del capitale. Dati di mercato forniti da Binance API in tempo reale.
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div style="max-width:1100px;margin:0 auto;">
+    <p style="margin-bottom:8px;"><strong>KTrader</strong> — Segnali Trading Crypto Live</p>
+    <p>Telegram: <a href="https://t.me/GIO33BOT" target="_blank" rel="noopener">@GIO33BOT</a> · <a href="segnali.html">Sala Segnali</a> · <a href="pricing.html">Prezzi</a> · <a href="legal/privacy.html">Privacy</a></p>
+    <p style="margin-top:12px;font-size:11px;">© 2026 KTrader · Non è consulenza finanziaria</p>
+  </div>
+</footer>
+
+<!-- UPGRADE MODAL — mostrata al raggiungimento del limite giornaliero -->
+<div id="upgradeModal" class="upgrade-overlay" role="dialog" aria-modal="true" aria-labelledby="upgradeModalTitle" aria-hidden="true">
+  <div class="upgrade-dialog">
+    <div class="upgrade-icon">🔒</div>
+    <h2 id="upgradeModalTitle" class="upgrade-title">Limite giornaliero raggiunto</h2>
+    <p class="upgrade-text">Hai terminato le <strong>5 domande gratuite</strong> di oggi. Sblocca più analisi e funzionalità avanzate con un piano KTrader.</p>
+    <div class="upgrade-actions">
+      <button class="upgrade-btn-primary" onclick="redirectToPricing()">Scopri i pacchetti →</button>
+      <button class="upgrade-btn-close" onclick="closeUpgradeModal()">Chiudi</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const API_KEY     = 'gsk_hOl5dXcOv3a5UVdbbpOnWG'+'dyb3FYqSlIIgIaoC4WoSAPfXCUVNKn';
+const MODEL       = 'llama-3.3-70b-versatile';
+const DAILY_LIMIT = 5;
+const STORE_KEY   = 'nt_ai_v3';
+const ENDPOINT    = 'https://api.groq.com/openai/v1/chat/completions';
+
+// Base system prompt — il contesto di mercato live viene aggiunto dinamicamente in callAI()
+const SYSTEM_BASE = `Sei l'assistente AI di KTrader, piattaforma italiana di trading algoritmico crypto su MEXC Futures.
+Hai accesso a dati di mercato LIVE che vengono forniti all'inizio di ogni messaggio come blocco "DATI MERCATO LIVE".
+REGOLE FONDAMENTALI:
+- Usa SEMPRE i dati live forniti per rispondere: prezzi, RSI, trend EMA. NON inventare valori.
+- Se i dati live non sono disponibili, dillo esplicitamente.
+- Rispondi SEMPRE in italiano, sii conciso (max 180 parole), usa elenchi puntati per livelli chiave.
+- Termina sempre con "⚠️ Non è consulenza finanziaria."
+BOT KTRADER DISPONIBILI:
+- Trend Rider 4h: long-only su BTC/ETH/SOL, EMA200 filtro, CAGR 10.3%, DD max -9%
+- ETH V4 15m: long+short su ETHUSDT, +232% netto
+- SOL V2 15m: long+short su SOLUSDT, +41% netto
+- UT Bot 4h: long+short su BTCUSDT, +257% in 24 mesi
+- ZEC Scalp V3 5m: scalping su ZECUSDT, +91.6% lordo
+SALA SEGNALI: analisi multi-timeframe (5m/15m/1h/4h/1d) con 20 strategie tecniche in parallelo su 17 asset.
+Quando rispondi a domande sui bot o sulla Sala Segnali, fai riferimento a questi dati reali.`;
+
+// Dati di mercato in memoria (aggiornati ogni volta che si carica la pagina + ogni domanda)
+let marketCache = null;
+let marketCacheTime = 0;
+const CACHE_TTL = 60000; // 1 minuto
+
+let history = [];
+
+// ── Calcoli tecnici ──────────────────────────────────────────────────────────
+function calcRSI(closes, period = 14) {
+  if (closes.length < period + 1) return null;
+  let gains = 0, losses = 0;
+  for (let i = closes.length - period; i < closes.length; i++) {
+    const diff = closes[i] - closes[i - 1];
+    if (diff > 0) gains += diff; else losses -= diff;
+  }
+  const avgGain = gains / period;
+  const avgLoss = losses / period;
+  if (avgLoss === 0) return 100;
+  return 100 - 100 / (1 + avgGain / avgLoss);
+}
+
+function calcEMA(closes, period) {
+  if (closes.length < period) return null;
+  const k = 2 / (period + 1);
+  let ema = closes.slice(0, period).reduce((a, b) => a + b) / period;
+  for (let i = period; i < closes.length; i++) ema = closes[i] * k + ema * (1 - k);
+  return ema;
+}
+
+function calcChange24h(closes) {
+  if (closes.length < 25) return null;
+  const now = closes[closes.length - 1];
+  const prev = closes[closes.length - 25];
+  return ((now - prev) / prev * 100);
+}
+
+// ── Fetch dati Binance ───────────────────────────────────────────────────────
+async function fetchAsset(symbol, name) {
+  const url = `https://api.binance.com/api/v3/klines?symbol=${symbol}&interval=1h&limit=60`;
+  const r = await fetch(url);
+  if (!r.ok) throw new Error('Binance ' + r.status);
+  const data = await r.json();
+  const closes = data.map(k => parseFloat(k[4]));
+  const price = closes[closes.length - 1];
+  const rsi = calcRSI(closes, 14);
+  const ema20 = calcEMA(closes, 20);
+  const ema50 = calcEMA(closes, 50);
+  const chg = calcChange24h(closes);
+  const trend = ema20 && ema50
+    ? (price > ema20 && ema20 > ema50 ? 'BULLISH' : price < ema20 && ema20 < ema50 ? 'BEARISH' : 'NEUTRO')
+    : (ema20 ? (price > ema20 ? 'sopra EMA20' : 'sotto EMA20') : '—');
+  return { name, symbol, price, rsi, ema20, ema50, chg, trend };
+}
+
+async function fetchAllMarkets() {
+  const now = Date.now();
+  if (marketCache && now - marketCacheTime < CACHE_TTL) return marketCache;
+
+  const pairs = [
+    { symbol: 'BTCUSDT', name: 'BTC' },
+    { symbol: 'ETHUSDT', name: 'ETH' },
+    { symbol: 'SOLUSDT', name: 'SOL' },
+    { symbol: 'XRPUSDT', name: 'XRP' },
+    { symbol: 'BNBUSDT', name: 'BNB' },
+  ];
+
+  const results = await Promise.allSettled(pairs.map(p => fetchAsset(p.symbol, p.name)));
+  const assets = results
+    .filter(r => r.status === 'fulfilled')
+    .map(r => r.value);
+
+  marketCache = assets;
+  marketCacheTime = now;
+  return assets;
+}
+
+// ── Ticker UI ────────────────────────────────────────────────────────────────
+function rsiClass(rsi) {
+  if (rsi === null) return 'rsi-neutral';
+  if (rsi >= 70) return 'rsi-ob';
+  if (rsi <= 30) return 'rsi-os';
+  return 'rsi-neutral';
+}
+
+function renderTicker(assets) {
+  const ticker = document.getElementById('market-ticker');
+  if (!assets || assets.length === 0) {
+    ticker.innerHTML = '<span style="color:#ef4444;font-size:12px;">⚠️ Dati live non disponibili</span>';
+    return;
+  }
+  const now = new Date().toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit' });
+  let html = `<span style="color:#475569;font-size:11px;">🔴 LIVE ${now}</span>`;
+  for (const a of assets) {
+    const rsiVal = a.rsi !== null ? a.rsi.toFixed(0) : '—';
+    const chgStr = a.chg !== null ? (a.chg >= 0 ? `+${a.chg.toFixed(1)}%` : `${a.chg.toFixed(1)}%`) : '';
+    const chgColor = a.chg !== null ? (a.chg >= 0 ? '#4ade80' : '#f87171') : '#94a3b8';
+    const priceStr = a.price >= 1000
+      ? a.price.toLocaleString('it-IT', { maximumFractionDigits: 0 })
+      : a.price.toLocaleString('it-IT', { maximumFractionDigits: 3 });
+    html += `<div class="ticker-item">
+      <span class="ticker-label">${a.name}</span>
+      <span class="ticker-price">$${priceStr}</span>
+      <span style="color:${chgColor};font-size:11px;">${chgStr}</span>
+      <span class="ticker-rsi ${rsiClass(a.rsi)}">RSI ${rsiVal}</span>
+    </div>`;
+  }
+  ticker.innerHTML = html;
+}
+
+// ── Contesto mercato per il system prompt ────────────────────────────────────
+function buildMarketContext(assets) {
+  if (!assets || assets.length === 0) return '';
+  const now = new Date().toLocaleString('it-IT', { timeZone: 'UTC', hour: '2-digit', minute: '2-digit', day: '2-digit', month: '2-digit' });
+  let lines = [`--- DATI MERCATO LIVE (${now} UTC) ---`];
+  for (const a of assets) {
+    const rsiStr = a.rsi !== null ? `RSI1h=${a.rsi.toFixed(1)}` : 'RSI=n/d';
+    const chgStr = a.chg !== null ? ` var24h=${a.chg >= 0 ? '+' : ''}${a.chg.toFixed(2)}%` : '';
+    const priceStr = a.price >= 1000
+      ? a.price.toLocaleString('en-US', { maximumFractionDigits: 0 })
+      : a.price.toLocaleString('en-US', { maximumFractionDigits: 4 });
+    const emaStr = a.ema20 ? ` EMA20=$${a.ema20 >= 1000 ? a.ema20.toLocaleString('en-US', {maximumFractionDigits:0}) : a.ema20.toFixed(3)}` : '';
+    lines.push(`${a.name}: $${priceStr}${chgStr} | ${rsiStr} | Trend=${a.trend}${emaStr}`);
+  }
+  lines.push('---');
+  return '\n\n' + lines.join('\n');
+}
+
+// ── Utility ──────────────────────────────────────────────────────────────────
+function getUsage() {
+  try {
+    const d = JSON.parse(localStorage.getItem(STORE_KEY) || '{}');
+    const today = new Date().toDateString();
+    return d.date === today ? d : { date: today, count: 0 };
+  } catch { return { date: new Date().toDateString(), count: 0 }; }
+}
+function saveUsage(u) { try { localStorage.setItem(STORE_KEY, JSON.stringify(u)); } catch {} }
+
+function updateRateBar() {
+  const u = getUsage();
+  document.getElementById('rate-used').textContent = u.count;
+  if (u.count >= DAILY_LIMIT) {
+    document.getElementById('rate-msg').textContent = '— limite giornaliero raggiunto';
+    document.getElementById('send-btn').disabled = true;
+    document.getElementById('user-input').disabled = true;
+    document.querySelector('.chat-wrap').classList.add('limit-hit');
+    // mostra l'overlay che cattura i click su elementi disabled
+    document.getElementById('chat-input-blocker').style.display = 'block';
+  }
+}
+
+function esc(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function appendMsg(role, text) {
+  const win = document.getElementById('chat-window');
+  const el = document.createElement('div');
+  el.className = 'msg ' + role;
+  el.innerHTML = `<div class="msg-avatar">${role === 'ai' ? '🤖' : '👤'}</div>
+    <div class="msg-bubble">${esc(text).replace(/\n/g,'<br>')}</div>`;
+  win.appendChild(el);
+  win.scrollTop = win.scrollHeight;
+}
+
+function showTyping() {
+  const win = document.getElementById('chat-window');
+  const el = document.createElement('div');
+  el.className = 'msg ai'; el.id = 'typing';
+  el.innerHTML = `<div class="msg-avatar">🤖</div><div class="msg-bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div>`;
+  win.appendChild(el);
+  win.scrollTop = win.scrollHeight;
+}
+function hideTyping() { const t = document.getElementById('typing'); if (t) t.remove(); }
+
+// ── Chiamata AI con contesto live ────────────────────────────────────────────
+async function callAI(text) {
+  history.push({ role: 'user', content: text });
+  if (history.length > 12) history = history.slice(-12);
+
+  // Aggiorna dati mercato e costruisci system prompt dinamico
+  let mktCtx = '';
+  try {
+    const assets = await fetchAllMarkets();
+    mktCtx = buildMarketContext(assets);
+    renderTicker(assets);
+  } catch (_) { /* se Binance non risponde, continua senza dati live */ }
+
+  const systemFull = SYSTEM_BASE + mktCtx;
+
+  const res = await fetch(ENDPOINT, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + API_KEY,
+    },
+    body: JSON.stringify({
+      model: MODEL,
+      messages: [{ role: 'system', content: systemFull }, ...history],
+      max_tokens: 500,
+      temperature: 0.6,
+    }),
+  });
+
+  if (!res.ok) {
+    const errBody = await res.json().catch(() => ({}));
+    throw new Error('HTTP ' + res.status + (errBody.error?.message ? ': ' + errBody.error.message : ''));
+  }
+  const data = await res.json();
+  const reply = data.choices?.[0]?.message?.content;
+  if (!reply) throw new Error('Risposta vuota dal modello');
+  history.push({ role: 'assistant', content: reply });
+  return reply;
+}
+
+async function handleSend() {
+  const input = document.getElementById('user-input');
+  const text = input.value.trim();
+  if (!text) return;
+  const u = getUsage();
+  if (u.count >= DAILY_LIMIT) { openUpgradeModal(); return; }
+  input.value = '';
+  document.getElementById('send-btn').disabled = true;
+  appendMsg('user', text);
+  showTyping();
+  try {
+    const reply = await callAI(text);
+    hideTyping();
+    appendMsg('ai', reply);
+    u.count++; saveUsage(u); updateRateBar();
+    // mostra modal con leggero ritardo dopo l'ultima risposta
+    if (u.count >= DAILY_LIMIT) setTimeout(openUpgradeModal, 1400);
+  } catch (e) {
+    hideTyping();
+    appendMsg('ai', '⚠️ Errore: ' + e.message + '\n\nRiprova tra qualche secondo.');
+  } finally {
+    if (getUsage().count < DAILY_LIMIT) document.getElementById('send-btn').disabled = false;
+    input.focus();
+  }
+}
+
+function sendQuick(t) { document.getElementById('user-input').value = t; handleSend(); }
+
+document.getElementById('user-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); handleSend(); }
+});
+
+// ── Inizializzazione ─────────────────────────────────────────────────────────
+updateRateBar();
+appendMsg('ai', 'Ciao! Sono KTrader AI 🤖\n\nSto caricando i dati di mercato live da Binance...\n\nChiedimi analisi su BTC, ETH, SOL o i bot KTrader — rispondo con prezzi e indicatori aggiornati adesso. Hai 5 domande gratuite al giorno.');
+
+// Carica subito il ticker live
+fetchAllMarkets()
+  .then(assets => renderTicker(assets))
+  .catch(() => {
+    document.getElementById('market-ticker').innerHTML =
+      '<span style="color:#ef4444;font-size:12px;">⚠️ Dati live non disponibili — l\'AI risponderà con dati di training</span>';
+  });
+
+// ── UPGRADE MODAL ────────────────────────────────────────────────────────────
+
+function openUpgradeModal() {
+  const modal = document.getElementById('upgradeModal');
+  if (modal.classList.contains('is-open')) return; // evita aperture multiple
+  modal.classList.add('is-open');
+  modal.setAttribute('aria-hidden', 'false');
+  // focus sul pulsante principale per accessibilità
+  modal.querySelector('.upgrade-btn-primary').focus();
+}
+
+function closeUpgradeModal() {
+  const modal = document.getElementById('upgradeModal');
+  modal.classList.remove('is-open');
+  modal.setAttribute('aria-hidden', 'true');
+}
+
+function redirectToPricing() {
+  window.location.href = 'https://nuovocanale991-bit.github.io/ktrader/pricing.html';
+}
+
+// chiudi con ESC
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeUpgradeModal();
+});
+
+// chiudi cliccando sull'overlay fuori dal dialog
+document.getElementById('upgradeModal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeUpgradeModal();
+});
+
+// l'overlay sull'area input apre la modal (cattura click su elementi disabled)
+document.getElementById('chat-input-blocker').addEventListener('click', openUpgradeModal);
+
+// se il limite era già raggiunto al caricamento pagina, mostra subito l'overlay
+if (getUsage().count >= DAILY_LIMIT) {
+  document.getElementById('chat-input-blocker').style.display = 'block';
+}
+
+// ── INTERCETTORI LIMITE ───────────────────────────────────────────────────────
+// Blocca click su input/send/qp-btn quando il limite è raggiunto.
+// Usa capture phase per intercettare prima degli handler originali.
+document.querySelector('.chat-wrap').addEventListener('click', e => {
+  if (getUsage().count < DAILY_LIMIT) return;
+  const blocked = e.target.closest('#user-input, #send-btn, .qp-btn, .chat-input-row, .quick-prompts');
+  if (blocked) { e.preventDefault(); e.stopImmediatePropagation(); openUpgradeModal(); }
+}, true);
+
+// ── data-limit-gate: intercettore scalabile per qualsiasi elemento futuro ────
+// Aggiungi data-limit-gate="true" a qualsiasi bottone/card/link per bloccarlo
+// automaticamente quando il limite giornaliero è esaurito.
+document.addEventListener('click', e => {
+  const gated = e.target.closest('[data-limit-gate="true"]');
+  if (!gated) return;
+  if (getUsage().count >= DAILY_LIMIT) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    openUpgradeModal();
+  }
+}, true);
+</script>
+<script>
+(function(){
+  document.querySelectorAll('.nav-item').forEach(function(el){
+    var t;
+    el.addEventListener('mouseenter',function(){clearTimeout(t);el.classList.add('is-open');});
+    el.addEventListener('mouseleave',function(){t=setTimeout(function(){el.classList.remove('is-open');},5000);});
+  });
+})();
+</script>
+</body>
+</html>
