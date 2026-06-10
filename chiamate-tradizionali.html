@@ -145,6 +145,11 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .faq-box .faq-a{padding:0 18px 14px;font-size:13px;color:var(--muted);line-height:1.7}
 .faq-hdr{font-size:17px;font-weight:800;color:#fff;margin:8px 0 4px}
 .faq-sub{font-size:13px;color:var(--dim);margin-bottom:12px}
+/* ── SIDEBAR A SCOMPARSA (apre solo da hamburger) ── */
+.sidebar{transform:translateX(-240px)}
+.sidebar.open{transform:translateX(0)}
+.main-wrap{margin-left:0}
+@media(max-width:900px){.sidebar{width:240px}}
 </style>
 </head>
 <body>
@@ -286,12 +291,8 @@ function closeSidebar(){
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('sb-overlay').classList.remove('visible');
 }
-(function(){if(window.innerWidth>900)document.getElementById('sidebar').classList.add('open');})();
-window.addEventListener('resize',function(){
-  const sb=document.getElementById('sidebar'),ov=document.getElementById('sb-overlay');
-  if(window.innerWidth>900){sb.classList.add('open');ov.classList.remove('visible');}
-  else{sb.classList.remove('open');ov.classList.remove('visible');}
-});
+
+
 
 const TRAD_CALL_ASSETS=[
   {id:'sp500',   label:'S&P 500',     sym:'ES=F',   dp:0},

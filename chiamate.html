@@ -275,6 +275,11 @@ body::before{content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;ba
 .faq-box summary::after{content:'+';color:var(--dim);font-size:18px;font-weight:400;flex-shrink:0}
 .faq-box details[open] summary::after{content:'–'}
 .faq-box .faq-a{padding:0 18px 14px;font-size:13px;color:var(--muted);line-height:1.7}
+/* ── SIDEBAR A SCOMPARSA (apre solo da hamburger) ── */
+.sidebar{transform:translateX(-240px)}
+.sidebar.open{transform:translateX(0)}
+.main-wrap{margin-left:0}
+@media(max-width:900px){.sidebar{width:240px}}
 </style>
 </head>
 <body>
@@ -609,13 +614,9 @@ function closeSidebar(){
   document.getElementById('sidebar').classList.remove('open');
   document.getElementById('sb-overlay').classList.remove('visible');
 }
-// Auto-open sidebar on desktop
-(function(){if(window.innerWidth>900)document.getElementById('sidebar').classList.add('open');})();
-window.addEventListener('resize',function(){
-  const sb=document.getElementById('sidebar'),ov=document.getElementById('sb-overlay');
-  if(window.innerWidth>900){sb.classList.add('open');ov.classList.remove('visible');}
-  else{sb.classList.remove('open');ov.classList.remove('visible');}
-});
+
+
+
 
 // ── INDICATORI ────────────────────────────────────────────────
 function ema(arr,p){
